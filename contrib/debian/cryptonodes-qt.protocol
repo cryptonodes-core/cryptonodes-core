@@ -1,0 +1,11 @@
+[Protocol]
+exec=cryptonodes-qt '%u'
+protocol=cryptonodes
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Cryptonodes
+Comment=Cryptonodes P2P Cryptocurrency
+Exec=cryptonodes-qt %u
+Terminal=false
+Type=Application
+Icon=cryptonodes128
+MimeType=x-scheme-handler/cryptonodes;
+Categories=Office;Finance;
+Name[en_US]=cryptonodes-qt.desktop

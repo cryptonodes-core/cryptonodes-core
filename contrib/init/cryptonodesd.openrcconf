@@ -1,0 +1,26 @@
+# /etc/conf.d/cryptonodesd: config file for /etc/init.d/cryptonodesd
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/cryptonodes/cryptonodes.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/cryptonodesd"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/cryptonodesd.pid"
+
+# Where to write cryptonodesd data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/cryptonodesd"
+
+# User and group to own cryptonodesd process
+#BITCOIND_USER="cryptonodes"
+#BITCOIND_GROUP="cryptonodes"
+
+# Path to cryptonodesd executable
+#BITCOIND_BIN="/usr/bin/cryptonodesd"
+
+# Nice value to run cryptonodesd under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+BITCOIND_OPTS=""

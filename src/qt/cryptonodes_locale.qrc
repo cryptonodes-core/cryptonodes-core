@@ -1,0 +1,29 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/cryptonodes_bg.qm</file>
+        <file alias="ca">locale/cryptonodes_ca.qm</file>
+        <file alias="cs">locale/cryptonodes_cs.qm</file>
+        <file alias="da">locale/cryptonodes_da.qm</file>
+        <file alias="de">locale/cryptonodes_de.qm</file>
+        <file alias="en">locale/cryptonodes_en.qm</file>
+        <file alias="en_US">locale/cryptonodes_en_US.qm</file>
+        <file alias="es">locale/cryptonodes_es.qm</file>
+        <file alias="fi">locale/cryptonodes_fi.qm</file>
+        <file alias="fr_FR">locale/cryptonodes_fr_FR.qm</file>
+        <file alias="it">locale/cryptonodes_it.qm</file>
+        <file alias="ja">locale/cryptonodes_ja.qm</file>
+        <file alias="ko_KR">locale/cryptonodes_ko_KR.qm</file>
+        <file alias="nl">locale/cryptonodes_nl.qm</file>
+        <file alias="pl">locale/cryptonodes_pl.qm</file>
+        <file alias="pt">locale/cryptonodes_pt.qm</file>
+        <file alias="pt_BR">locale/cryptonodes_pt_BR.qm</file>
+        <file alias="ro_RO">locale/cryptonodes_ro_RO.qm</file>
+        <file alias="ru">locale/cryptonodes_ru.qm</file>
+        <file alias="sk">locale/cryptonodes_sk.qm</file>
+        <file alias="sv">locale/cryptonodes_sv.qm</file>
+        <file alias="tr">locale/cryptonodes_tr.qm</file>
+        <file alias="uk">locale/cryptonodes_uk.qm</file>
+        <file alias="zh_CN">locale/cryptonodes_zh_CN.qm</file>
+        <file alias="zh_TW">locale/cryptonodes_zh_TW.qm</file>
+    </qresource>
+</RCC>

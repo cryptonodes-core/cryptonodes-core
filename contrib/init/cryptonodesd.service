@@ -1,0 +1,26 @@
+[Unit]
+Description=Cryptonodes's distributed currency daemon
+After=network.target
+
+[Service]
+User=cryptonodes
+Group=cryptonodes
+
+Type=forking
+PIDFile=/var/lib/cryptonodesd/cryptonodesd.pid
+
+ExecStart=/usr/bin/cryptonodesd -daemon -pid=/var/lib/cryptonodesd/cryptonodesd.pid \
+          -conf=/etc/cryptonodes/cryptonodes.conf -datadir=/var/lib/cryptonodesd
+
+ExecStop=-/usr/bin/cryptonodes-cli -conf=/etc/cryptonodes/cryptonodes.conf \
+         -datadir=/var/lib/cryptonodesd stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
