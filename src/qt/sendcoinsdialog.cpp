@@ -551,7 +551,7 @@ void SendCoinsDialog::setBalance(const CAmount& balance, const CAmount& unconfir
         uint64_t bal = 0;
         QSettings settings;
         bal = balance;
-        ui->labelBalance->setText(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), bal - unconfirmedBalance - immatureBalance));
+        ui->labelBalance->setText(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), bal));
     }
 }
 

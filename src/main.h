@@ -14,7 +14,6 @@
 #include "config/cryptonodes-config.h"
 #endif
 
-#include "bignum.h"
 #include "amount.h"
 #include "chain.h"
 #include "chainparams.h"
