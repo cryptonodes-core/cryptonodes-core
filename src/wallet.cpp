@@ -13,6 +13,7 @@
 #include "kernel.h"
 #include "masternode-budget.h"
 #include "masternode-payments.h"
+#include "masternode-vote.h"
 #include "net.h"
 #include "primitives/transaction.h"
 #include "script/script.h"
@@ -1581,6 +1582,38 @@ bool CWallet::GetBudgetSystemCollateralTX(CWalletTx& tx, uint256 hash, bool useI
     return true;
 }
 
+bool CWallet::GetCommunityVoteSystemCollateralTX(CTransaction& tx, uint256 hash, bool useIX)
+{
+    CWalletTx wtx;
+    if (GetCommunityVoteSystemCollateralTX(wtx, hash, useIX)) {
+        tx = (CTransaction)wtx;
+        return true;
+    }
+    return false;
+}
+
+bool CWallet::GetCommunityVoteSystemCollateralTX(CWalletTx& tx, uint256 hash, bool useIX)
+{
+    // make our change address
+    CReserveKey reservekey(pwalletMain);
+
+    CScript scriptChange;
+    scriptChange << OP_RETURN << ToByteVector(hash);
+
+    CAmount nFeeRet = 0;
+    std::string strFail = "";
+    vector<pair<CScript, CAmount> > vecSend;
+    vecSend.push_back(make_pair(scriptChange, COMMUNITY_VOTE_FEE_TX));
+
+    CCoinControl* coinControl = NULL;
+    bool success = CreateTransaction(vecSend, tx, reservekey, nFeeRet, strFail, coinControl, ALL_COINS, useIX, (CAmount)0);
+    if (!success) {
+        LogPrintf("GetCommunityVoteSystemCollateralTX: Error - %s\n", strFail);
+        return false;
+    }
+
+    return true;
+}
 
 bool CWallet::ConvertList(std::vector<CTxIn> vCoins, std::vector<CAmount>& vecAmounts)
 {
@@ -1812,8 +1845,12 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, const CAmount& nValue, CWa
 }
 
 // ppcoin: create coin stake transaction
-bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64_t nSearchInterval, CMutableTransaction& txNew, unsigned int& nTxNewTime)
+bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64_t nSearchInterval, CAmount nFees, CMutableTransaction& txNew, unsigned int& nTxNewTime)
 {
+    // We start paying the fees to stakers only after v1.4.0 fork.
+    if (Params().NetworkID() == CBaseChainParams::MAIN && chainActive.Height() < SOFT_FORK_VERSION_140)
+        nFees = 0;
+
     // The following split & combine thresholds are important to security
     // Should not be adjusted if you don't understand the consequences
     //int64_t nCombineThreshold = 0;
@@ -1927,7 +1964,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
             //presstab HyperStake - calculate the total size of our new output including the stake reward so that we can use it to decide whether to split the stake outputs
             const CBlockIndex* pIndex0 = chainActive.Tip();
-            uint64_t nTotalSize = pcoin.first->vout[pcoin.second].nValue + GetBlockValue(pIndex0->nHeight);
+            uint64_t nTotalSize = pcoin.first->vout[pcoin.second].nValue + nFees + GetBlockValue(pIndex0->nHeight);
 
             //presstab HyperStake - if MultiSend is set to send in coinstake we will add our outputs here (values asigned further down)
             if (nTotalSize / 2 > nStakeSplitThreshold * COIN)
@@ -1947,7 +1984,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     // Calculate reward
     CAmount nReward;
     const CBlockIndex* pIndex0 = chainActive.Tip();
-    nReward = GetBlockValue(pIndex0->nHeight);
+    nReward = nFees + GetBlockValue(pIndex0->nHeight);
     nCredit += nReward;
 
     CAmount nMinFee = 0;

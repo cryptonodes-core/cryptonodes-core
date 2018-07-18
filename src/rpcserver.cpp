@@ -2,6 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2018 The Cryptonodes-Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -41,7 +42,7 @@ static std::string rpcWarmupStatus("RPC server started");
 static CCriticalSection cs_rpcWarmup;
 
 //! These are created by StartRPCThreads, destroyed in StopRPCThreads
-static asio::io_service* rpc_io_service = NULL;
+static boost::asio::io_service* rpc_io_service = NULL;
 static map<string, boost::shared_ptr<deadline_timer> > deadlineTimers;
 static ssl::context* rpc_ssl_context = NULL;
 static boost::thread_group* rpc_worker_group = NULL;
@@ -354,6 +355,12 @@ static const CRPCCommand vRPCCommands[] =
         {"cryptonodes", "checkbudgets", &checkbudgets, true, true, false},
         {"cryptonodes", "mnsync", &mnsync, true, true, false},
         {"cryptonodes", "spork", &spork, true, true, false},
+        {"cryptonodes", "preparecommunityproposal", &preparecommunityproposal, true, true, false},
+        {"cryptonodes", "submitcommunityproposal", &submitcommunityproposal, true, true, false},
+        {"cryptonodes", "getcommunityinfo", &getcommunityinfo, true, true, false},
+        {"cryptonodes", "checkcommunityproposals", &checkcommunityproposals, true, true, false},
+        {"cryptonodes", "getcommunityproposalvotes", &getcommunityproposalvotes, true, true, false},
+        {"cryptonodes", "mncommunityvote", &mncommunityvote, true, true, false},
 #ifdef ENABLE_WALLET
 
         /* Wallet */
@@ -482,7 +489,7 @@ class AcceptedConnectionImpl : public AcceptedConnection
 {
 public:
     AcceptedConnectionImpl(
-        asio::io_service& io_service,
+        boost::asio::io_service& io_service,
         ssl::context& context,
         bool fUseSSL) : sslStream(io_service, context),
                         _d(sslStream, fUseSSL),
@@ -506,18 +513,18 @@ public:
     }
 
     typename Protocol::endpoint peer;
-    asio::ssl::stream<typename Protocol::socket> sslStream;
+    boost::asio::ssl::stream<typename Protocol::socket> sslStream;
 
 private:
     SSLIOStreamDevice<Protocol> _d;
-    iostreams::stream<SSLIOStreamDevice<Protocol> > _stream;
+    boost::iostreams::stream< SSLIOStreamDevice<Protocol> > _stream;
 };
 
 void ServiceConnection(AcceptedConnection* conn);
 
 //! Forward declaration required for RPCListen
-template <typename Protocol, typename SocketAcceptorService>
-static void RPCAcceptHandler(boost::shared_ptr<basic_socket_acceptor<Protocol, SocketAcceptorService> > acceptor,
+template <typename Protocol>
+static void RPCAcceptHandler(boost::shared_ptr<basic_socket_acceptor<Protocol> > acceptor,
     ssl::context& context,
     bool fUseSSL,
     boost::shared_ptr<AcceptedConnection> conn,
@@ -526,18 +533,18 @@ static void RPCAcceptHandler(boost::shared_ptr<basic_socket_acceptor<Protocol, S
 /**
  * Sets up I/O resources to accept and handle a new connection.
  */
-template <typename Protocol, typename SocketAcceptorService>
-static void RPCListen(boost::shared_ptr<basic_socket_acceptor<Protocol, SocketAcceptorService> > acceptor,
+template <typename Protocol>
+static void RPCListen(boost::shared_ptr<basic_socket_acceptor<Protocol> > acceptor,
     ssl::context& context,
     const bool fUseSSL)
 {
     // Accept connection
-    boost::shared_ptr<AcceptedConnectionImpl<Protocol> > conn(new AcceptedConnectionImpl<Protocol>(acceptor->get_io_service(), context, fUseSSL));
+    boost::shared_ptr< AcceptedConnectionImpl<Protocol> > conn(new AcceptedConnectionImpl<Protocol>(acceptor->get_io_service(), context, fUseSSL));
 
     acceptor->async_accept(
         conn->sslStream.lowest_layer(),
         conn->peer,
-        boost::bind(&RPCAcceptHandler<Protocol, SocketAcceptorService>,
+        boost::bind(&RPCAcceptHandler<Protocol>,
             acceptor,
             boost::ref(context),
             fUseSSL,
@@ -549,15 +556,15 @@ static void RPCListen(boost::shared_ptr<basic_socket_acceptor<Protocol, SocketAc
 /**
  * Accept and handle incoming connection.
  */
-template <typename Protocol, typename SocketAcceptorService>
-static void RPCAcceptHandler(boost::shared_ptr<basic_socket_acceptor<Protocol, SocketAcceptorService> > acceptor,
+template <typename Protocol>
+static void RPCAcceptHandler(boost::shared_ptr<basic_socket_acceptor<Protocol> > acceptor,
     ssl::context& context,
     const bool fUseSSL,
     boost::shared_ptr<AcceptedConnection> conn,
     const boost::system::error_code& error)
 {
     // Immediately start accepting new connections, except when we're cancelled or our socket is closed.
-    if (error != asio::error::operation_aborted && acceptor->is_open())
+    if (error != boost::asio::error::operation_aborted && acceptor->is_open())
         RPCListen(acceptor, context, fUseSSL);
 
     AcceptedConnectionImpl<ip::tcp>* tcp_conn = dynamic_cast<AcceptedConnectionImpl<ip::tcp>*>(conn.get());
@@ -626,8 +633,8 @@ void StartRPCThreads()
     }
 
     assert(rpc_io_service == NULL);
-    rpc_io_service = new asio::io_service();
-    rpc_ssl_context = new ssl::context(*rpc_io_service, ssl::context::sslv23);
+    rpc_io_service = new boost::asio::io_service();
+    rpc_ssl_context = new ssl::context(ssl::context::sslv23);
 
     const bool fUseSSL = GetBoolArg("-rpcssl", false);
 
@@ -649,7 +656,7 @@ void StartRPCThreads()
             LogPrintf("ThreadRPCServer ERROR: missing server private key file %s\n", pathPKFile.string());
 
         string strCiphers = GetArg("-rpcsslciphers", "TLSv1.2+HIGH:TLSv1+HIGH:!SSLv2:!aNULL:!eNULL:!3DES:@STRENGTH");
-        SSL_CTX_set_cipher_list(rpc_ssl_context->impl(), strCiphers.c_str());
+        SSL_CTX_set_cipher_list(rpc_ssl_context->native_handle(), strCiphers.c_str());
     }
 
     std::vector<ip::tcp::endpoint> vEndpoints;

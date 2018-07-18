@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2013 The Bitcoin developers
+// Copyright (c) The Cryptonodes-Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -169,7 +170,9 @@ enum {
     MSG_BUDGET_FINALIZED_VOTE,
     MSG_MASTERNODE_QUORUM,
     MSG_MASTERNODE_ANNOUNCE,
-    MSG_MASTERNODE_PING
+    MSG_MASTERNODE_PING,
+    MSG_COMMUNITY_PROPOSAL,
+    MSG_COMMUNITY_VOTE
 };
 
 #endif // BITCOIN_PROTOCOL_H
