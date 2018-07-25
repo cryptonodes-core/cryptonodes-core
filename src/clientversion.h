@@ -1,4 +1,5 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2018 The Cryptonodes-Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,7 +17,7 @@
 //! These need to be macros, as clientversion.cpp's and cryptonodes*-res.rc's voodoo requires it
 #define CLIENT_VERSION_MAJOR 1
 #define CLIENT_VERSION_MINOR 3
-#define CLIENT_VERSION_REVISION 0
+#define CLIENT_VERSION_REVISION 1
 #define CLIENT_VERSION_BUILD 0
 
 //! Set to true for release, false for prerelease or test build
@@ -62,6 +63,7 @@ extern const std::string CLIENT_BUILD;
 extern const std::string CLIENT_DATE;
 
 
+std::string FormatVersion(int nVersion);
 std::string FormatFullVersion();
 std::string FormatSubVersion(const std::string& name, int nClientVersion, const std::vector<std::string>& comments);
 
