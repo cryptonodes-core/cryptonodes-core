@@ -82,7 +82,6 @@ endif
 .PHONY: FORCE
 # cryptonodes core #
 BITCOIN_CORE_H = \
-  bignum.h \
   activemasternode.h \
   addrman.h \
   alert.h \

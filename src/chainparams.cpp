@@ -8,7 +8,6 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "chainparams.h"
-#include "bignum.h"
 #include "random.h"
 #include "util.h"
 #include "utilstrencodings.h"
@@ -46,14 +45,16 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0, uint256("0x0000008d5b81a80afddae66a5c211ad56ac03b031df0335449a19d4c7c30d436"));
+    (0, uint256("0x0000008d5b81a80afddae66a5c211ad56ac03b031df0335449a19d4c7c30d436"))
+    (10000, uint256("0xd33525a4ece02def7b306fb3fd0097af765b04b7126a62c7f8d9ad1a255116cb"))
+    (25000, uint256("0x08eca3ac42773b506a2d11a9af05a0fe6f7349e2c13754d31e7820a47ec256ee"));
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1529411413, // * UNIX timestamp of last checkpoint block
-    0,          // * total number of transactions between genesis and last checkpoint
+    1531402320, // * UNIX timestamp of last checkpoint block
+    53950,      // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
-    2000        // * estimated number of transactions per day after checkpoint
+    3000        // * estimated number of transactions per day after checkpoint
 };
 
 static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
