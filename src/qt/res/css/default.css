@@ -234,6 +234,11 @@ QPushButton:pressed {
 	border:1px solid #000000;
 }
 
+QPushButton:disabled{
+  border:1px solid #aaaaaa;
+	background-color:#bbbbbb;
+}
+
 /* Special handling for statusbar-icons (which are partly QPushButtons) */
 QPushButton#labelEncryptionIcon, QPushButton#labelConnectionsIcon {
 	border: 0px;
@@ -897,6 +902,7 @@ QWidget .QFrame#frameBalances .QLabel#labelSpendable { /* Spendable Header */
 }
 
 QWidget .QFrame#frameBalances .QLabel#labelImmatureText, /* Immature Balance Label */
+QWidget .QFrame#frameBalances .QLabel#labelTotalText, /* Total Balance Label */
 QWidget .QFrame#frameBalances .QLabel#labelPendingText, /* Pending Balance Label */
 QWidget .QFrame#frameBalances .QLabel#labelBalanceText, /* Available Balance Label */
 QWidget .QFrame#frameBalances .QLabel#labelBalances { /* CNMC Balances Header Label */
@@ -908,19 +914,7 @@ QWidget .QFrame#frameBalances .QLabel#labelBalances { /* CNMC Balances Header La
 	font-size: 14px;
 }
 
-QWidget .QFrame#frameBalances .QLabel#labelBalanceText, /* Available Balance Label */
-QWidget .QFrame#frameBalances .QLabel#labelTotalText { /* Total Balance Label */
-	qproperty-alignment: 'AlignVCenter | AlignLeft';
-	min-width: 160px;
-	color: #333333;
-	margin-right: 5px;
-	padding-right: 5px;
-	font-size: 14px;
-	font-weight: bold;
-}
-
-QWidget .QFrame#frameBalances .QLabel#labelBalances { /* CNMC Balances Header Label */
-	font-size:20px;
+QWidget .QFrame#frameBalances .QLabel#labelBalances { /* BITG Balances Header Label */
 	font-weight: bold;
 }
 
