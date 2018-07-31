@@ -901,23 +901,27 @@ QWidget .QFrame#frameBalances .QLabel#labelSpendable { /* Spendable Header */
 	margin-left:16px;
 }
 
-
+QWidget .QFrame#frameBalances .QLabel#labelTotalText, /* Total Balance Label */
 QWidget .QFrame#frameBalances .QLabel#labelBalanceText { /* Available Balance Label */
 	qproperty-alignment: 'AlignVCenter | AlignLeft';
 	min-width: 160px;
 	color: #333333;
 	font-weight:bold;
-}
-
-QWidget .QFrame#frameBalances .QLabel#labelTotalText { /* Total Balance Label */
-	qproperty-alignment: 'AlignVCenter | AlignLeft';
-	min-width: 160px;
-	color: #333333;
-	font-weight:bold;
+	margin-right: 5px;
+	padding-right: 5px;
+	font-size: 14px;
 }
 
 QWidget .QFrame#frameBalances .QLabel#labelImmatureText, /* Immature Balance Label */
-QWidget .QFrame#frameBalances .QLabel#labelPendingText, /* Pending Balance Label */
+QWidget .QFrame#frameBalances .QLabel#labelPendingText { /* Pending Balance Label */
+	qproperty-alignment: 'AlignVCenter | AlignLeft';
+	min-width: 160px;
+	color: #333333;
+	margin-right: 5px;
+	padding-right: 5px;
+	font-size: 12px;
+}
+
 QWidget .QFrame#frameBalances .QLabel#labelBalances { /* CNMC Balances Header Label */
 	qproperty-alignment: 'AlignVCenter | AlignLeft';
 	min-width: 160px;
