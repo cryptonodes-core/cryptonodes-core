@@ -45,8 +45,8 @@ const std::string CLIENT_NAME("Cryptonodes Core");
 
 //! git will put "#define GIT_ARCHIVE 1" on the next line inside archives.
 #ifdef GIT_ARCHIVE
-#define GIT_COMMIT_ID "$Format:%H$"
-#define GIT_COMMIT_DATE "$Format:%cD$"
+#define GIT_COMMIT_ID "5ef3470"
+#define GIT_COMMIT_DATE "Mon, 25 Jun. 2018"
 #endif
 
 #define BUILD_DESC_WITH_SUFFIX(maj, min, rev, build, suffix) \
