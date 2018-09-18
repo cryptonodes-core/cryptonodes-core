@@ -25,6 +25,7 @@
 #include "masternodeconfig.h"
 #include "masternodeman.h"
 #include "masternode-helpers.h"
+#include "masternode-vote.h"
 #include "miner.h"
 #include "net.h"
 #include "rpcserver.h"
@@ -191,6 +192,7 @@ void PrepareShutdown()
     StopTorControl();
     DumpMasternodes();
     DumpBudgets();
+    DumpCommunityVotes();
     DumpMasternodePayments();
     UnregisterNodeSignals(GetNodeSignals());
 
@@ -764,7 +766,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     }
 
     if (!GetBoolArg("-enableswifttx", fEnableSwiftTX)) {
-        if (SoftSetArg("-swifttxdepth", "0"))
+        if (SoftSetArg("-swifttxdepth", 0))
             LogPrintf("AppInit2 : parameter interaction: -enableswifttx=false -> setting -nSwiftTXDepth=0\n");
     }
 
@@ -1152,7 +1154,6 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     // -proxy sets a proxy for all outgoing network traffic
     // -noproxy (or -proxy=0) as well as the empty string can be used to not set a proxy, this is the default
     std::string proxyArg = GetArg("-proxy", "");
-    SetLimited(NET_TOR);
     if (proxyArg != "" && proxyArg != "0") {
         CService proxyAddr;
         if (!Lookup(proxyArg.c_str(), proxyAddr, 9050, fNameLookup)) {
@@ -1167,7 +1168,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
         SetProxy(NET_IPV6, addrProxy);
         SetProxy(NET_TOR, addrProxy);
         SetNameProxy(addrProxy);
-        SetLimited(NET_TOR, false); // by default, -proxy sets onion as reachable, unless -noonion later
+        SetReachable(NET_TOR); // by default, -proxy sets onion as reachable, unless -noonion later
     }
 
     // -onion can be used to set only a proxy for .onion, or override normal proxy for .onion addresses
@@ -1176,7 +1177,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     std::string onionArg = GetArg("-onion", "");
     if (onionArg != "") {
         if (onionArg == "0") { // Handle -noonion/-onion=0
-            SetLimited(NET_TOR); // set onions as unreachable
+            SetReachable(NET_TOR, false); // set onions as unreachable
         } else {
             CService onionProxy;
             if (!Lookup(onionArg.c_str(), onionProxy, 9050, fNameLookup)) {
@@ -1186,7 +1187,7 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
             if (!addrOnion.IsValid())
                 return InitError(strprintf(_("Invalid -onion address or hostname: '%s'"), onionArg));
             SetProxy(NET_TOR, addrOnion);
-            SetLimited(NET_TOR, false);
+            SetReachable(NET_TOR);
         }
     }
 
@@ -1586,6 +1587,25 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
         else
             LogPrintf("file format is unknown or invalid, please fix it manually\n");
     }
+
+    uiInterface.InitMessage(_("Loading community cache..."));
+
+    CCommunityDB communitydb;
+    CCommunityDB::ReadResult readResult4 = communitydb.Read(communityVote);
+
+    if (readResult4 == CCommunityDB::FileError)
+        LogPrintf("Missing community cache - communityvote.dat, will try to recreate\n");
+    else if (readResult4 != CCommunityDB::Ok) {
+        LogPrintf("Error reading communityvote.dat: ");
+        if (readResult4 == CCommunityDB::IncorrectFormat)
+            LogPrintf("magic is ok but data has invalid format, will try to recreate\n");
+        else
+            LogPrintf("file format is unknown or invalid, please fix it manually\n");
+    }
+
+    //flag our cached items so we send them to our peers
+    communityVote.ResetSync();
+    communityVote.ClearSeen();
 
     fMasterNode = GetBoolArg("-masternode", false);
 
