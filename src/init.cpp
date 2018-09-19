@@ -163,6 +163,7 @@ public:
 
 static CCoinsViewDB* pcoinsdbview = NULL;
 static CCoinsViewErrorCatcher* pcoinscatcher = NULL;
+static boost::scoped_ptr<ECCVerifyHandle> globalVerifyHandle;
 
 /** Preparing steps before shutting down or restarting the wallet */
 void PrepareShutdown()
@@ -265,6 +266,8 @@ void Shutdown()
     delete pwalletMain;
     pwalletMain = NULL;
 #endif
+    globalVerifyHandle.reset();
+    ECC_Stop();
     LogPrintf("%s: done\n", __func__);
 }
 
@@ -316,6 +319,7 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageOpt("-alertnotify=<cmd>", _("Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)"));
     strUsage += HelpMessageOpt("-alerts", strprintf(_("Receive and display P2P network alerts (default: %u)"), DEFAULT_ALERTS));
     strUsage += HelpMessageOpt("-blocknotify=<cmd>", _("Execute command when the best block changes (%s in cmd is replaced by block hash)"));
+    strUsage += HelpMessageOpt("-blocksizenotify=<cmd>", _("Execute command when the best block changes and its size is over (%s in cmd is replaced by block hash, %d with the block size)"));
     strUsage += HelpMessageOpt("-checkblocks=<n>", strprintf(_("How many blocks to check at startup (default: %u, 0 = all)"), 500));
     strUsage += HelpMessageOpt("-checklevel=<n>", strprintf(_("How thorough the block verification of -checkblocks is (0-4, default: %u)"), 3));
     strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), "cryptonodes.conf"));
@@ -544,6 +548,15 @@ static void BlockNotifyCallback(const uint256& hashNewTip)
     boost::thread t(runCommand, strCmd); // thread runs free
 }
 
+static void BlockSizeNotifyCallback(int size, const uint256& hashNewTip)
+{
+    std::string strCmd = GetArg("-blocksizenotify", "");
+
+    boost::replace_all(strCmd, "%s", hashNewTip.GetHex());
+    boost::replace_all(strCmd, "%d", std::to_string(size));
+    boost::thread t(runCommand, strCmd); // thread runs free
+}
+
 struct CImportingNow {
     CImportingNow()
     {
@@ -624,8 +637,7 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
 bool InitSanityCheck(void)
 {
     if (!ECC_InitSanityCheck()) {
-        InitError("OpenSSL appears to lack support for elliptic curve cryptography. For more "
-                  "information, visit https://en.bitcoin.it/wiki/OpenSSL_and_EC_Libraries");
+        InitError("Elliptic curve cryptography sanity check failure. Aborting.");
         return false;
     }
     if (!glibc_sanity_test() || !glibcxx_sanity_test())
@@ -908,6 +920,10 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
 
     // ********************************************************* Step 4: application initialization: dir lock, daemonize, pidfile, debug log
 
+    // Initialize elliptic curve code
+    ECC_Start();
+    globalVerifyHandle.reset(new ECCVerifyHandle());
+
     // Sanity check
     if (!InitSanityCheck())
         return InitError(_("Initialization sanity check failed. Cryptonodes Core is shutting down."));
@@ -1157,12 +1173,12 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
     if (proxyArg != "" && proxyArg != "0") {
         CService proxyAddr;
         if (!Lookup(proxyArg.c_str(), proxyAddr, 9050, fNameLookup)) {
-            return InitError(strprintf(_("Invalid -proxy address or hostname: '%s'"), proxyArg));
+            return InitError(strprintf(_("Lookup(): Invalid -proxy address or hostname: '%s'"), proxyArg));
         }
 
         proxyType addrProxy = proxyType(proxyAddr, proxyRandomize);
         if (!addrProxy.IsValid())
-            return InitError(strprintf(_("Invalid -proxy address or hostname: '%s'"), proxyArg));
+            return InitError(strprintf(_("isValid(): Invalid -proxy address or hostname: '%s'"), proxyArg));
 
         SetProxy(NET_IPV4, addrProxy);
         SetProxy(NET_IPV6, addrProxy);
@@ -1519,6 +1535,9 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
 
     if (mapArgs.count("-blocknotify"))
         uiInterface.NotifyBlockTip.connect(BlockNotifyCallback);
+
+    if (mapArgs.count("-blocksizenotify"))
+        uiInterface.NotifyBlockSize.connect(BlockSizeNotifyCallback);
 
     // scan for better chains in the block chain database, that are not yet connected in the active best chain
     CValidationState state;
