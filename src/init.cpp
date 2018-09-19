@@ -25,6 +25,7 @@
 #include "masternodeconfig.h"
 #include "masternodeman.h"
 #include "masternode-helpers.h"
+#include "masternode-vote.h"
 #include "miner.h"
 #include "net.h"
 #include "rpcserver.h"
@@ -192,6 +193,7 @@ void PrepareShutdown()
     StopTorControl();
     DumpMasternodes();
     DumpBudgets();
+    DumpCommunityVotes();
     DumpMasternodePayments();
     UnregisterNodeSignals(GetNodeSignals());
 
@@ -433,7 +435,7 @@ std::string HelpMessage(HelpMessageMode mode)
         strUsage += HelpMessageOpt("-stopafterblockimport", strprintf(_("Stop running after importing blocks from disk (default: %u)"), 0));
         strUsage += HelpMessageOpt("-sporkkey=<privkey>", _("Enable spork administration functionality with the appropriate private key."));
     }
-    string debugCategories = "addrman, alert, bench, coindb, db, lock, rand, rpc, selectcoins, tor, mempool, net, proxy, cryptonodes, (swifttx, masternode, mnpayments, mnbudget)"; // Don't translate these and qt below
+    string debugCategories = "addrman, alert, bench, coindb, db, lock, rand, rpc, selectcoins, tor, mempool, net, proxy, cryptonodes, (swifttx, masternode, mnpayments, mnbudget, mncommunityvote)"; // Don't translate these and qt below
     if (mode == HMM_BITCOIN_QT)
         debugCategories += ", qt";
     strUsage += HelpMessageOpt("-debug=<category>", strprintf(_("Output debugging information (default: %u, supplying <category> is optional)"), 0) + ". " +
@@ -463,7 +465,7 @@ std::string HelpMessage(HelpMessageMode mode)
     }
     strUsage += HelpMessageOpt("-shrinkdebugfile", _("Shrink debug.log file on client startup (default: 1 when no -debug)"));
     strUsage += HelpMessageOpt("-testnet", _("Use the test network"));
-    strUsage += HelpMessageOpt("-litemode=<n>", strprintf(_("Disable all Cryptonodes specific functionality (Masternodes, SwiftTX, Budgeting) (0-1, default: %u)"), 0));
+    strUsage += HelpMessageOpt("-litemode=<n>", strprintf(_("Disable all Cryptonodes specific functionality (Masternodes, SwiftTX, Budgeting, Community Votes) (0-1, default: %u)"), 0));
 
 #ifdef ENABLE_WALLET
     strUsage += HelpMessageGroup(_("Staking options:"));
@@ -1605,6 +1607,25 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
         else
             LogPrintf("file format is unknown or invalid, please fix it manually\n");
     }
+
+    uiInterface.InitMessage(_("Loading community cache..."));
+
+    CCommunityDB communitydb;
+    CCommunityDB::ReadResult readResult4 = communitydb.Read(communityVote);
+
+    if (readResult4 == CCommunityDB::FileError)
+        LogPrintf("Missing community cache - communityvote.dat, will try to recreate\n");
+    else if (readResult4 != CCommunityDB::Ok) {
+        LogPrintf("Error reading communityvote.dat: ");
+        if (readResult4 == CCommunityDB::IncorrectFormat)
+            LogPrintf("magic is ok but data has invalid format, will try to recreate\n");
+        else
+            LogPrintf("file format is unknown or invalid, please fix it manually\n");
+    }
+
+    //flag our cached items so we send them to our peers
+    communityVote.ResetSync();
+    communityVote.ClearSeen();
 
     fMasterNode = GetBoolArg("-masternode", false);
 

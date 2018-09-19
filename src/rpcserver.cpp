@@ -355,6 +355,13 @@ static const CRPCCommand vRPCCommands[] =
         {"cryptonodes", "checkbudgets", &checkbudgets, true, true, false},
         {"cryptonodes", "mnsync", &mnsync, true, true, false},
         {"cryptonodes", "spork", &spork, true, true, false},
+        {"cryptonodes", "preparecommunityproposal", &preparecommunityproposal, true, true, false},
+        {"cryptonodes", "submitcommunityproposal", &submitcommunityproposal, true, true, false},
+        {"cryptonodes", "getcommunityinfo", &getcommunityinfo, true, true, false},
+        {"cryptonodes", "checkcommunityproposals", &checkcommunityproposals, true, true, false},
+        {"cryptonodes", "getcommunityproposalvotes", &getcommunityproposalvotes, true, true, false},
+        {"cryptonodes", "mncommunityvote", &mncommunityvote, true, true, false},
+
 #ifdef ENABLE_WALLET
 
         /* Wallet */
