@@ -1,5 +1,6 @@
 // Copyright (c) 2014-2016 The Dash developers
 // Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2018-2019 The Cryptonodes Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -67,6 +68,7 @@ void LoadSporksFromDB();
 void ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStream& vRecv);
 int64_t GetSporkValue(int nSporkID);
 bool IsSporkActive(int nSporkID);
+void ExecuteSpork(int nSporkID, int nValue);
 void ReprocessBlocks(int nBlocks);
 
 //

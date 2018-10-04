@@ -1,5 +1,6 @@
 // Copyright (c) 2014-2016 The Dash developers
 // Copyright (c) 2016-2017 The PIVX developers
+// Copyright (c) 2018-2019 The Cryptonodes Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -96,6 +97,9 @@ void ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
         mapSporksActive[spork.nSporkID] = spork;
         sporkManager.Relay(spork);
 
+        // does a task if needed
+        ExecuteSpork(spork.nSporkID, spork.nValue);
+
         // CNMC: add to spork database.
         pSporkDB->WriteSpork(spork.nSporkID, spork);
     }
@@ -144,6 +148,14 @@ bool IsSporkActive(int nSporkID)
     int64_t r = GetSporkValue(nSporkID);
     if (r == -1) return false;
     return r < GetTime();
+}
+
+void ExecuteSpork(int nSporkID, int nValue)
+{
+    if (nSporkID == SPORK_12_RECONSIDER_BLOCKS && nValue > 0) {
+        LogPrintf("Spork::ExecuteSpork -- Reconsider Last %d Blocks\n", nValue);
+        ReprocessBlocks(nValue);
+    }
 }
 
 void ReprocessBlocks(int nBlocks)
