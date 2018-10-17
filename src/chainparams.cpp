@@ -66,13 +66,13 @@ static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
 
 static const Checkpoints::CCheckpointData dataTestnet = {
     &mapCheckpointsTestnet,
-    1529413269,
+    1539698400,
     0,
     250};
 
 static Checkpoints::MapCheckpoints mapCheckpointsRegtest =
     boost::assign::map_list_of
-    (0, uint256("0x5e4b778aa1c49d60f0df414f9fcfc3aad23868268bca2211b5f5576adbc0a083"));
+    (0, uint256("0x001"));
 
 static const Checkpoints::CCheckpointData dataRegtest = {
     &mapCheckpointsRegtest,
@@ -130,9 +130,7 @@ public:
         assert(genesis.hashMerkleRoot == uint256("0x4056baa34fc0c0afed7c76f24279cfcda5ac0b02a3efbf70175cc6b5232a4251"));
 
         // DNS Seeding
-        vSeeds.push_back(CDNSSeedData("seed1.cryptonodes.ch", "seed1.cryptonodes.ch"));
-        vSeeds.push_back(CDNSSeedData("seed2.cryptonodes.ch", "seed2.cryptonodes.ch"));
-        vSeeds.push_back(CDNSSeedData("seed3.cryptonodes.ch", "seed3.cryptonodes.ch"));
+        vSeeds.push_back(CDNSSeedData("185.62.81.137", "185.62.81.137"));
 
         // Cryptonodes addresses start with 'c'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 88);
@@ -200,11 +198,11 @@ public:
         nMaxMoneyOut = 21000000 * COIN;
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.nTime = 1529413269;
-        genesis.nNonce = 427729;
+        genesis.nTime = 1539698400;
+        genesis.nNonce = 2879459;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x00000e604e1a9d566d6ed8c65b7fadf5a9f641123b25b25f5bb468b732160302"));
+        assert(hashGenesisBlock == uint256("0x00000191f104a8075035f85872ec087330b722d66ff55c4820bd188d540d4741"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -232,8 +230,8 @@ public:
         fTestnetToBeDeprecatedFieldRPC = true;
 
         nPoolMaxTransactions = 2;
-        strSporkKey = "047e10b487fecfa76f9cc5219833ecfb5b438dc340838b8075581f6766a1e5a7e8a87b8d13b4c3844c268e66c0dde9f4727c9062a494ef3271962f6f804d9dc6bf";
-        strMasternodePoolDummyAddress = "gdoiPQaA4W39oCdVUyEK9aucaSBfXYb5ke";
+        strSporkKey = "04DE2FDC95F5D532713BF870878B7775097CB124D5BA4213DF23EF1E52862BE33636E721EA89B13A6B5FB1D9B19132E10399DC6D6106013ED0C863E6560DD1439B";
+        strMasternodePoolDummyAddress = "gYAkjyGZVnvJBEjHF1eyDRdnxoazvRxEtG";
         nStartMasternodePayments = genesis.nTime + 86400; // 24 hours after genesis
         nBudget_Fee_Confirmations = 3; // Number of confirmations for the finalization fee. We have to make this very short
                                        // here because we only have a 8 block finalization window on testnet
