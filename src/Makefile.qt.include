@@ -1,4 +1,9 @@
-bin_PROGRAMS += qt/cryptonodes-qt
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Copyright (c) 2018-2018 The Cryptonodes Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/bitcoingreen-qt
 EXTRA_LIBRARIES += qt/libbitcoinqt.a
 
 # cryptonodes qt core #
