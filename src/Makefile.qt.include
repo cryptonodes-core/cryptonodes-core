@@ -3,7 +3,7 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-bin_PROGRAMS += qt/bitcoingreen-qt
+bin_PROGRAMS += qt/cryptonodes-qt
 EXTRA_LIBRARIES += qt/libbitcoinqt.a
 
 # cryptonodes qt core #

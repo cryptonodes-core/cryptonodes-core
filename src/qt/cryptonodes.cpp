@@ -512,8 +512,8 @@ int main(int argc, char* argv[])
 // Do not refer to data directory yet, this can be overridden by Intro::pickDataDirectory
 
 /// 2. Basic Qt initialization (not dependent on parameters or configuration)
-    Q_INIT_RESOURCE(bitcoingreen_locale);
-    Q_INIT_RESOURCE(bitcoingreen);
+    Q_INIT_RESOURCE(cryptonodes_locale);
+    Q_INIT_RESOURCE(cryptonodes);
 
     BitcoinApplication app(argc, argv);
 #if QT_VERSION > 0x050100
