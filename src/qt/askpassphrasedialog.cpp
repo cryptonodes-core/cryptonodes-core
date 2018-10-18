@@ -81,7 +81,7 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel
     else
         ui->stakingCheckBox->setChecked(false);
 
-    // It doesn't make sense to show the checkbox for sending BITG because you wouldn't check it anyway.
+    // It doesn't make sense to show the checkbox for sending CNMC because you wouldn't check it anyway.
     if (context == Context::Send_CNMC)
         ui->stakingCheckBox->hide();
 
