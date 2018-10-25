@@ -18,6 +18,7 @@
 #include "kernel.h"
 #include "masternode-budget.h"
 #include "masternode-payments.h"
+#include "masternode-vote.h"
 #include "masternodeman.h"
 #include "merkleblock.h"
 #include "net.h"
@@ -133,9 +134,9 @@ struct CBlockIndexWorkComparator {
 CBlockIndex* pindexBestInvalid;
 
 /**
-     * The set of all CBlockIndex entries with BLOCK_VALID_TRANSACTIONS (for itself and all ancestors) and
-     * as good as our current tip or better. Entries may be failed, though.
-     */
+ * The set of all CBlockIndex entries with BLOCK_VALID_TRANSACTIONS (for itself and all ancestors) and
+ * as good as our current tip or better. Entries may be failed, though.
+ */
 set<CBlockIndex*, CBlockIndexWorkComparator> setBlockIndexCandidates;
 /** Number of nodes with fSyncStarted. */
 int nSyncStarted = 0;
@@ -147,17 +148,17 @@ std::vector<CBlockFileInfo> vinfoBlockFile;
 int nLastBlockFile = 0;
 
 /**
-     * Every received block is assigned a unique and increasing identifier, so we
-     * know which one to give priority in case of a fork.
-     */
+ * Every received block is assigned a unique and increasing identifier, so we
+ * know which one to give priority in case of a fork.
+ */
 CCriticalSection cs_nBlockSequenceId;
 /** Blocks loaded from disk are assigned id 0, so start the counter at 1. */
 uint32_t nBlockSequenceId = 1;
 
 /**
-     * Sources of received blocks, to be able to send them reject messages or ban
-     * them, if processing happens afterwards. Protected by cs_main.
-     */
+ * Sources of received blocks, to be able to send them reject messages or ban
+ * them, if processing happens afterwards. Protected by cs_main.
+ */
 map<uint256, NodeId> mapBlockSource;
 
 /** Blocks that are in flight, and that are in the queue to be downloaded. Protected by cs_main. */
@@ -1768,8 +1769,8 @@ void Misbehaving(NodeId pnode, int howmuch)
     state->nMisbehavior += howmuch;
     int banscore = GetArg("-banscore", 100);
     if (state->nMisbehavior >= banscore && state->nMisbehavior - howmuch < banscore) {
-        //LogPrintf("Misbehaving: %s (%d -> %d) BAN THRESHOLD EXCEEDED\n", state->name, state->nMisbehavior - howmuch, state->nMisbehavior);
-        //state->fShouldBan = true;
+        LogPrintf("Misbehaving: %s (%d -> %d) BAN THRESHOLD EXCEEDED\n", state->name, state->nMisbehavior - howmuch, state->nMisbehavior);
+        state->fShouldBan = true;
     } else
         LogPrintf("Misbehaving: %s (%d -> %d)\n", state->name, state->nMisbehavior - howmuch, state->nMisbehavior);
 }
@@ -3534,6 +3535,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         if (masternodeSync.RequestedMasternodeAssets > MASTERNODE_SYNC_LIST) {
             masternodePayments.ProcessBlock(GetHeight() + 10);
             budget.NewBlock();
+            communityVote.NewBlock();
         }
     }
 
@@ -4336,6 +4338,12 @@ bool static AlreadyHave(const CInv& inv)
         return false;
     case MSG_MASTERNODE_PING:
         return mnodeman.mapSeenMasternodePing.count(inv.hash);
+    case MSG_COMMUNITY_PROPOSAL:
+        if (communityVote.mapSeenMasternodeCommunityProposals.count(inv.hash)) {
+            masternodeSync.AddedCommunityItem(inv.hash);
+            return true;
+        }
+        return false;
     }
     // Don't know what it is, just say we already got one
     return true;
@@ -4531,6 +4539,16 @@ void static ProcessGetData(CNode* pfrom)
                         ss.reserve(1000);
                         ss << mnodeman.mapSeenMasternodePing[inv.hash];
                         pfrom->PushMessage("mnp", ss);
+                        pushed = true;
+                    }
+                }
+
+                if (!pushed && inv.type == MSG_COMMUNITY_PROPOSAL) {
+                    if (communityVote.mapSeenMasternodeCommunityProposals.count(inv.hash)) {
+                        CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
+                        ss.reserve(1000);
+                        ss << communityVote.mapSeenMasternodeCommunityProposals[inv.hash];
+                        pfrom->PushMessage("mcprop", ss);
                         pushed = true;
                     }
                 }
@@ -5328,6 +5346,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         //probably one the extensions
         mnodeman.ProcessMessage(pfrom, strCommand, vRecv);
         budget.ProcessMessage(pfrom, strCommand, vRecv);
+        communityVote.ProcessMessage(pfrom, strCommand, vRecv);
         masternodePayments.ProcessMessageMasternodePayments(pfrom, strCommand, vRecv);
         ProcessMessageSwiftTX(pfrom, strCommand, vRecv);
         ProcessSpork(pfrom, strCommand, vRecv);

@@ -12,7 +12,7 @@
  * network protocol versioning
  */
 
-static const int PROTOCOL_VERSION = 71205;
+static const int PROTOCOL_VERSION = 71206;
 
 //! initial proto version, to be increased after version/verack negotiation
 static const int INIT_PROTO_VERSION = 209;
@@ -22,7 +22,7 @@ static const int GETHEADERS_VERSION = 70077;
 
 //! disconnect from peers older than this proto version
 static const int MIN_PEER_PROTO_VERSION = 71204;
-static const int MIN_PEER_PROTO_VERSION_COMMUNITY_PROPOSALS = 71210;
+static const int MIN_PEER_PROTO_VERSION_COMMUNITY_PROPOSALS = 71206;
 
 //! fork blocks
 static const int SOFT_FORK_VERSION_140 = 2500000;

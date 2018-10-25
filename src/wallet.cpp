@@ -2,7 +2,7 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2018 The Cryptonodes-Core developers
+// Copyright (c) 2018-2019 The Cryptonodes Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -14,6 +14,7 @@
 #include "kernel.h"
 #include "masternode-budget.h"
 #include "masternode-payments.h"
+#include "masternode-vote.h"
 #include "net.h"
 #include "primitives/transaction.h"
 #include "script/script.h"
@@ -1584,6 +1585,38 @@ bool CWallet::GetBudgetSystemCollateralTX(CWalletTx& tx, uint256 hash, bool useI
     return true;
 }
 
+bool CWallet::GetCommunityVoteSystemCollateralTX(CTransaction& tx, uint256 hash, bool useIX)
+{
+    CWalletTx wtx;
+    if (GetCommunityVoteSystemCollateralTX(wtx, hash, useIX)) {
+        tx = (CTransaction)wtx;
+        return true;
+    }
+    return false;
+}
+
+bool CWallet::GetCommunityVoteSystemCollateralTX(CWalletTx& tx, uint256 hash, bool useIX)
+{
+    // make our change address
+    CReserveKey reservekey(pwalletMain);
+
+    CScript scriptChange;
+    scriptChange << OP_RETURN << ToByteVector(hash);
+
+    CAmount nFeeRet = 0;
+    std::string strFail = "";
+    vector<pair<CScript, CAmount> > vecSend;
+    vecSend.push_back(make_pair(scriptChange, COMMUNITY_VOTE_FEE_TX));
+
+    CCoinControl* coinControl = NULL;
+    bool success = CreateTransaction(vecSend, tx, reservekey, nFeeRet, strFail, coinControl, ALL_COINS, useIX, (CAmount)0);
+    if (!success) {
+        LogPrintf("GetCommunityVoteSystemCollateralTX: Error - %s\n", strFail);
+        return false;
+    }
+
+    return true;
+}
 
 bool CWallet::ConvertList(std::vector<CTxIn> vCoins, std::vector<CAmount>& vecAmounts)
 {
@@ -1917,7 +1950,8 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             {
                 //convert to pay to public key type
                 CKey key;
-                if (!keystore.GetKey(uint160(vSolutions[0]), key)) {
+                CKeyID keyID = CKeyID(uint160(vSolutions[0]));
+                if (!keystore.GetKey(keyID, key)) {
                     if (fDebug && GetBoolArg("-printcoinstake", false))
                         LogPrintf("CreateCoinStake : failed to get key for kernel type=%d\n", whichType);
                     break; // unable to find corresponding public key
