@@ -94,9 +94,9 @@ public:
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         nSubsidyHalvingInterval = 1050000;
         nMaxReorganizationDepth = 100;
-        nEnforceBlockUpgradeMajority = 750;
-        nRejectBlockOutdatedMajority = 950;
-        nToCheckBlockUpgradeMajority = 1000;
+        nEnforceBlockUpgradeMajority = 8100;
+        nRejectBlockOutdatedMajority = 10260;
+        nToCheckBlockUpgradeMajority = 10800;
         nMinerThreads = 0;
         nTargetTimespan = 1 * 60; // Cryptonodes: 1 day
         nTargetSpacing = 2 * 60;  // Cryptonodes: 2 minutes
@@ -183,9 +183,9 @@ public:
         pchMessageStart[3] = 0x34;
         vAlertPubKey = ParseHex("044cc6ad807dcb4a0d3dfe342316279970a4f322dfb951580e60d0740299f20084a2628fd447f59152838cef082443772a2946d43e8ee492ca43f13b63bbdf54b1");
         nDefaultPort = 44220;
-        nEnforceBlockUpgradeMajority = 51;
-        nRejectBlockOutdatedMajority = 75;
-        nToCheckBlockUpgradeMajority = 100;
+        nEnforceBlockUpgradeMajority = 4320;
+        nRejectBlockOutdatedMajority = 5472;
+        nToCheckBlockUpgradeMajority = 54760;
         nMinerThreads = 0;
         nTargetTimespan = 1 * 60; // Cryptonodes: 1 day
         nTargetSpacing = 2 * 60;  // Cryptonodes: 1 minute
