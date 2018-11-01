@@ -501,6 +501,8 @@ UniValue verifychain(const UniValue& params, bool fHelp)
         nCheckDepth = params[1].get_int();
 
     return CVerifyDB().VerifyDB(pcoinsTip, nCheckLevel, nCheckDepth);
+}
+
 /** Implementation of IsSuperMajority with better feedback */
 static UniValue SoftForkMajorityDesc(int minVersion, CBlockIndex* pindex, int nRequired)
 {
@@ -815,6 +817,7 @@ UniValue reconsiderblock(const UniValue& params, bool fHelp)
             "reconsiderblock \"hash\"\n"
             "\nRemoves invalidity status of a block and its descendants, reconsider them for activation.\n"
             "This can be used to undo the effects of invalidateblock.\n"
+
             "\nArguments:\n"
             "1. hash   (string, required) the hash of the block to reconsider\n"
             "\nResult:\n"
