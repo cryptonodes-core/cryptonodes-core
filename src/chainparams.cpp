@@ -183,16 +183,16 @@ public:
         pchMessageStart[3] = 0x34;
         vAlertPubKey = ParseHex("044cc6ad807dcb4a0d3dfe342316279970a4f322dfb951580e60d0740299f20084a2628fd447f59152838cef082443772a2946d43e8ee492ca43f13b63bbdf54b1");
         nDefaultPort = 44220;
-        nEnforceBlockUpgradeMajority = 4320;
-        nRejectBlockOutdatedMajority = 5472;
-        nToCheckBlockUpgradeMajority = 54760;
+        nEnforceBlockUpgradeMajority = 8100;
+        nRejectBlockOutdatedMajority = 10260;
+        nToCheckBlockUpgradeMajority = 10800;
         nMinerThreads = 0;
         nTargetTimespan = 1 * 60; // Cryptonodes: 1 day
         nTargetSpacing = 2 * 60;  // Cryptonodes: 1 minute
         nLastPOWBlock = 200;
         nMaturity = 15;
         nMasternodeCountDrift = 4;
-        nModifierUpdateBlock = 1;
+        nModifierUpdateBlock = 12100;
         nMaxMoneyOut = 21000000 * COIN;
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
