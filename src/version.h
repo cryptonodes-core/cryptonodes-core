@@ -25,7 +25,7 @@ static const int MIN_PEER_PROTO_VERSION = 71204;
 static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 71207;
 
 //! fork blocks
-static const int SOFT_FORK_VERSION_140 = 250000;
+static const int SOFT_FORK_VERSION_140 = 225000;
 
 //! nTime field added to CAddress, starting with this version;
 //! if possible, avoid requesting addresses nodes older than this
