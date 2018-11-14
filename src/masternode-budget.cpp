@@ -770,17 +770,35 @@ std::vector<CBudgetProposal*> CBudgetManager::GetBudget()
     }
 
     std::sort(vBudgetPorposalsSort.begin(), vBudgetPorposalsSort.end(), sortProposalsByVotes());
-
-    // ------- Grab The Budgets In Order
-
+    
     std::vector<CBudgetProposal*> vBudgetProposalsRet;
 
     CAmount nBudgetAllocated = 0;
     CBlockIndex* pindexPrev = chainActive.Tip();
     if (pindexPrev == NULL) return vBudgetProposalsRet;
 
+    // Grab The Highest Count
+
+    int nHighestCount = 0;
+    int nBlockHeight = pindexPrev->nHeight + 1;
+
+    std::map<uint256, CBudgetProposal>::iterator it1 = mapProposals.begin();
+    while (it1 != mapProposals.end()) {
+        CBudgetProposal* pBudgetProposal = &((*it1).second);
+        if ((int)pBudgetProposal->mapVotes.size() > nHighestCount &&
+            nBlockHeight >= pBudgetProposal->GetBlockStart() &&
+            nBlockHeight <= pBudgetProposal->GetBlockEnd()) {
+            nHighestCount = (int)pBudgetProposal->mapVotes.size();
+        }
+
+        ++it1;
+    }
+
+    // ------- Grab The Budgets In Order    
+
     int nBlockStart = pindexPrev->nHeight - pindexPrev->nHeight % GetBudgetPaymentCycleBlocks() + GetBudgetPaymentCycleBlocks();
     int nBlockEnd = nBlockStart + GetBudgetPaymentCycleBlocks() - 1;
+    int nCountThreshold = mnodeman.CountEnabled(ActiveProtocol()) / 10;
     CAmount nTotalBudget = GetTotalBudget(nBlockStart);
 
 
@@ -792,13 +810,15 @@ std::vector<CBudgetProposal*> CBudgetManager::GetBudget()
         //prop start/end should be inside this period
         if (pbudgetProposal->fValid && pbudgetProposal->nBlockStart <= nBlockStart &&
             pbudgetProposal->nBlockEnd >= nBlockEnd &&
+            // check the highest budget proposals (+/- 10% to assist in consensus)
+            (int)pbudgetProposal->mapVotes.size() >= nHighestCount - nCountThreshold &&
             pbudgetProposal->GetYeas() - pbudgetProposal->GetNays() > mnodeman.CountEnabled(ActiveProtocol()) / 10 &&
             pbudgetProposal->IsEstablished()) {
 
-            LogPrint("mnbudget","CBudgetManager::GetBudget() -   Check 1 passed: valid=%d | %ld <= %ld | %ld >= %ld | Yeas=%d Nays=%d Count=%d | established=%d\n",
+            LogPrint("mnbudget","CBudgetManager::GetBudget() -   Check 1 passed: valid=%d | %ld <= %ld | %ld >= %ld | Yeas=%d Nays=%d Count=%d | Threshold=%d | established=%d\n",
                       pbudgetProposal->fValid, pbudgetProposal->nBlockStart, nBlockStart, pbudgetProposal->nBlockEnd,
                       nBlockEnd, pbudgetProposal->GetYeas(), pbudgetProposal->GetNays(), mnodeman.CountEnabled(ActiveProtocol()) / 10,
-                      pbudgetProposal->IsEstablished());
+                      nCountThreshold, pbudgetProposal->IsEstablished());
 
             if (pbudgetProposal->GetAmount() + nBudgetAllocated <= nTotalBudget) {
                 pbudgetProposal->SetAllotted(pbudgetProposal->GetAmount());
@@ -811,10 +831,10 @@ std::vector<CBudgetProposal*> CBudgetManager::GetBudget()
             }
         }
         else {
-            LogPrint("mnbudget","CBudgetManager::GetBudget() -   Check 1 failed: valid=%d | %ld <= %ld | %ld >= %ld | Yeas=%d Nays=%d Count=%d | established=%d\n",
+            LogPrint("mnbudget","CBudgetManager::GetBudget() -   Check 1 failed: valid=%d | %ld <= %ld | %ld >= %ld | Yeas=%d Nays=%d Count=%d | Threshold=%d | established=%d\n",
                       pbudgetProposal->fValid, pbudgetProposal->nBlockStart, nBlockStart, pbudgetProposal->nBlockEnd,
                       nBlockEnd, pbudgetProposal->GetYeas(), pbudgetProposal->GetNays(), mnodeman.CountEnabled(ActiveProtocol()) / 10,
-                      pbudgetProposal->IsEstablished());
+                      nCountThreshold, pbudgetProposal->IsEstablished());
         }
 
         ++it2;
@@ -1300,12 +1320,9 @@ void CBudgetManager::Sync(CNode* pfrom, uint256 nProp, bool fPartial)
 
     /*
         Sync with a client on the network
-
         --
-
         This code checks each of the hash maps for all known budget proposals and finalized budget proposals, then checks them against the
         budget object to see if they're OK. If all checks pass, we'll send it to the peer.
-
     */
 
     int nInvCount = 0;
