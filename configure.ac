@@ -1,8 +1,8 @@
 dnl require autoconf 2.60 (AS_ECHO/AS_ECHO_N)
 AC_PREREQ([2.60])
 define(_CLIENT_VERSION_MAJOR, 1)
-define(_CLIENT_VERSION_MINOR, 3)
-define(_CLIENT_VERSION_REVISION, 2)
+define(_CLIENT_VERSION_MINOR, 4)
+define(_CLIENT_VERSION_REVISION, 0)
 define(_CLIENT_VERSION_BUILD, 0)
 define(_CLIENT_VERSION_IS_RELEASE, true)
 define(_COPYRIGHT_YEAR, 2018)
@@ -1045,7 +1045,7 @@ if test x$system_univalue = xno; then
   AC_CONFIG_SUBDIRS([src/univalue])
 fi
 
-ac_configure_args="${ac_configure_args} --disable-shared --with-pic"
+ac_configure_args="${ac_configure_args} --disable-shared --with-pic --enable-module-recovery"
 AC_CONFIG_SUBDIRS([src/secp256k1])
 
 AC_OUTPUT

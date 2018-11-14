@@ -16,8 +16,8 @@
 
 //! These need to be macros, as clientversion.cpp's and cryptonodes*-res.rc's voodoo requires it
 #define CLIENT_VERSION_MAJOR 1
-#define CLIENT_VERSION_MINOR 3
-#define CLIENT_VERSION_REVISION 2
+#define CLIENT_VERSION_MINOR 4
+#define CLIENT_VERSION_REVISION 0
 #define CLIENT_VERSION_BUILD 0
 
 //! Set to true for release, false for prerelease or test build
@@ -61,7 +61,6 @@ static const int CLIENT_VERSION =
 extern const std::string CLIENT_NAME;
 extern const std::string CLIENT_BUILD;
 extern const std::string CLIENT_DATE;
-
 
 std::string FormatVersion(int nVersion);
 std::string FormatFullVersion();

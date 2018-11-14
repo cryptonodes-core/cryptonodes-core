@@ -23,8 +23,8 @@ Build-Depends: debhelper,
  libprotobuf-dev, protobuf-compiler
 Standards-Version: 3.9.2
 Homepage: http://www.cryptonodes.ch
-Vcs-Git: git://github.com/cryptonodes/cryptonodes.git
-Vcs-Browser: http://github.com/cryptonodes/cryptonodes
+Vcs-Git: git://github.com/cryptonodes-core/cryptonodes-core.git
+Vcs-Browser: http://github.com/cryptonodes-core/cryptonodes-core
 
 Package: cryptonodesd
 Architecture: any

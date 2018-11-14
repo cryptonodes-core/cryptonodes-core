@@ -40,13 +40,13 @@ const std::string CLIENT_NAME("Cryptonodes Core");
 
 //! First, include build.h if requested
 #ifdef HAVE_BUILD_INFO
-#include "build.h"
+#include "obj/build.h"
 #endif
 
 //! git will put "#define GIT_ARCHIVE 1" on the next line inside archives.
 #ifdef GIT_ARCHIVE
-#define GIT_COMMIT_ID "5ef3470"
-#define GIT_COMMIT_DATE "Mon, 25 Jun. 2018"
+#define GIT_COMMIT_ID "$Format:%H$"
+#define GIT_COMMIT_DATE "$Format:%cD$"
 #endif
 
 #define BUILD_DESC_WITH_SUFFIX(maj, min, rev, build, suffix) \

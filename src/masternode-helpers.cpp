@@ -40,7 +40,6 @@ void ThreadMasternodePool()
 
             if (c % 60 == 0) {
                 mnodeman.CheckAndRemove();
-                mnodeman.ProcessMasternodeConnections();
                 masternodePayments.CleanPaymentList();
                 CleanTransactionLocksList();
             }

@@ -1,6 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2018-2019 The Cryptonodes Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -229,7 +230,7 @@ extern UniValue decodescript(const UniValue& params, bool fHelp);
 extern UniValue signrawtransaction(const UniValue& params, bool fHelp);
 extern UniValue sendrawtransaction(const UniValue& params, bool fHelp);
 
-extern UniValue getblockcount(const UniValue& params, bool fHelp);
+extern UniValue getblockcount(const UniValue& params, bool fHelp); // in rpcblockchain.cpp
 extern UniValue getbestblockhash(const UniValue& params, bool fHelp);
 extern UniValue getdifficulty(const UniValue& params, bool fHelp);
 extern UniValue settxfee(const UniValue& params, bool fHelp);
@@ -246,7 +247,7 @@ extern UniValue getchaintips(const UniValue& params, bool fHelp);
 extern UniValue invalidateblock(const UniValue& params, bool fHelp);
 extern UniValue reconsiderblock(const UniValue& params, bool fHelp);
 
-extern UniValue masternode(const UniValue& params, bool fHelp);
+extern UniValue masternode(const UniValue& params, bool fHelp); // in rpcmasternode.cpp
 extern UniValue listmasternodes(const UniValue& params, bool fHelp);
 extern UniValue getmasternodecount(const UniValue& params, bool fHelp);
 extern UniValue masternodeconnect(const UniValue& params, bool fHelp);
@@ -271,6 +272,13 @@ extern UniValue getbudgetinfo(const UniValue& params, bool fHelp);
 extern UniValue mnbudgetrawvote(const UniValue& params, bool fHelp);
 extern UniValue mnfinalbudget(const UniValue& params, bool fHelp);
 extern UniValue checkbudgets(const UniValue& params, bool fHelp);
+
+extern UniValue preparecommunityproposal(const UniValue& params, bool fHelp); // in rpcmasternode-vote.cpp
+extern UniValue submitcommunityproposal(const UniValue& params, bool fHelp);
+extern UniValue getcommunityinfo(const UniValue& params, bool fHelp);
+extern UniValue checkcommunityproposals(const UniValue& params, bool fHelp);
+extern UniValue getcommunityproposalvotes(const UniValue& params, bool fHelp);
+extern UniValue mncommunityvote(const UniValue& params, bool fHelp);
 
 extern UniValue getinfo(const UniValue& params, bool fHelp); // in rpcmisc.cpp
 extern UniValue mnsync(const UniValue& params, bool fHelp);

@@ -20,10 +20,7 @@
 #include "primitives/transaction.h"
 #include "scheduler.h"
 #include "ui_interface.h"
-
-#ifdef ENABLE_WALLET
 #include "wallet.h"
-#endif
 
 #ifdef WIN32
 #include <string.h>
@@ -392,8 +389,7 @@ CNode* FindNode(const CService& addr)
 CNode* ConnectNode(CAddress addrConnect, const char* pszDest)
 {
     if (pszDest == NULL) {
-        // we clean masternode connections in CMasternodeMan::ProcessMasternodeConnections()
-        // so should be safe to skip this and connect to local Hot MN on CActiveMasternode::ManageStatus()
+        // Connect to local Hot MN on CActiveMasternode::ManageStatus()
         if (IsLocal(addrConnect))
             return NULL;
 
@@ -645,6 +641,7 @@ void CNode::copyStats(CNodeStats& stats)
     X(nLastSend);
     X(nLastRecv);
     X(nTimeConnected);
+    X(nTimeOffset);
     X(addrName);
     X(nVersion);
     X(cleanSubVer);
@@ -1860,8 +1857,7 @@ void RelayInv(CInv& inv)
 {
     LOCK(cs_vNodes);
     BOOST_FOREACH (CNode* pnode, vNodes){
-        if((pnode->nServices==NODE_BLOOM_WITHOUT_MN) && inv.IsMasterNodeType())
-            continue;
+        if((pnode->nServices==NODE_BLOOM_WITHOUT_MN) && inv.IsMasterNodeType()) continue;
         if (pnode->nVersion >= ActiveProtocol())
             pnode->PushInventory(inv);
     }
@@ -2032,6 +2028,7 @@ CNode::CNode(SOCKET hSocketIn, CAddress addrIn, std::string addrNameIn, bool fIn
     nSendBytes = 0;
     nRecvBytes = 0;
     nTimeConnected = GetTime();
+    nTimeOffset = 0;
     addr = addrIn;
     addrName = addrNameIn == "" ? addr.ToStringIPPort() : addrNameIn;
     nVersion = 0;
@@ -2144,8 +2141,10 @@ void CNode::EndMessage() UNLOCK_FUNCTION(cs_vSend)
     if (mapArgs.count("-fuzzmessagestest"))
         Fuzz(GetArg("-fuzzmessagestest", 10));
 
-    if (ssSend.size() == 0)
+    if (ssSend.size() == 0) {
+	    LEAVE_CRITICAL_SECTION(cs_vSend);
         return;
+    }
 
     // Set the size
     unsigned int nSize = ssSend.size() - CMessageHeader::HEADER_SIZE;
