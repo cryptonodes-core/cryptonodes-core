@@ -1,5 +1,5 @@
 ---
-name: "cryptonodes-aarch64-1.4"
+name: "cryptonodes-aarch64-1.4.1"
 enable_cache: true
 suites:
 - "xenial"
