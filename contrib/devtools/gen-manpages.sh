@@ -7,23 +7,23 @@ BUILDDIR=${BUILDDIR:-$TOPDIR}
 BINDIR=${BINDIR:-$BUILDDIR/src}
 MANDIR=${MANDIR:-$TOPDIR/doc/man}
 
-BITCOINGREEND=${BITCOINGREEND:-$BINDIR/cryptonodesd}
-BITCOINGREENCLI=${BITCOINGREENCLI:-$BINDIR/cryptonodes-cli}
-BITCOINGREENTX=${BITCOINGREENTX:-$BINDIR/cryptonodes-tx}
-BITCOINGREENQT=${BITCOINGREENQT:-$BINDIR/qt/cryptonodes-qt}
+CRYPTONODESD=${CRYPTONODESD:-$BINDIR/cryptonodesd}
+CRYPTONODESCLI=${CRYPTONODESCLI:-$BINDIR/cryptonodes-cli}
+CRYPTONODESTX=${CRYPTONODESTX:-$BINDIR/cryptonodes-tx}
+CRYPTONODESQT=${CRYPTONODESQT:-$BINDIR/qt/cryptonodes-qt}
 
-[ ! -x $BITCOINGREEND ] && echo "$BITCOINGREEND not found or not executable." && exit 1
+[ ! -x $CRYPTONODESD ] && echo "$CRYPTONODESD not found or not executable." && exit 1
 
 # The autodetected version git tag can screw up manpage output a little bit
-BTCVER=($($BITCOINGREENCLI --version | head -n1 | awk -F'[ -]' '{ print $6, $7 }'))
+BTCVER=($($CRYPTONODESCLI --version | head -n1 | awk -F'[ -]' '{ print $6, $7 }'))
 
 # Create a footer file with copyright content.
 # This gets autodetected fine for cryptonodesd if --version-string is not set,
 # but has different outcomes for bitcoin-qt and cryptonodes-cli.
 echo "[COPYRIGHT]" > footer.h2m
-$BITCOINGREEND --version | sed -n '1!p' >> footer.h2m
+$CRYPTONODESD --version | sed -n '1!p' >> footer.h2m
 
-for cmd in $BITCOINGREEND $BITCOINGREENCLI $BITCOINGREENTX $BITCOINGREENQT; do
+for cmd in $CRYPTONODESD $CRYPTONODESCLI $CRYPTONODESTX $CRYPTONODESQT; do
   cmdname="${cmd##*/}"
   help2man -N --version-string=${BTCVER[0]} --include=footer.h2m -o ${MANDIR}/${cmdname}.1 ${cmd}
   sed -i "s/\\\-${BTCVER[1]}//g" ${MANDIR}/${cmdname}.1

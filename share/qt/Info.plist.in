@@ -32,7 +32,7 @@
   <string>Cryptonodes-Qt</string>
 
   <key>CFBundleName</key>
-  <string>BitcoinGreen-Qt</string>
+  <string>Cryptonodes-Qt</string>
 
   <key>LSHasLocalizedDisplayName</key>
   <true/>
