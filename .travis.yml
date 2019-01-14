@@ -48,7 +48,7 @@ jobs:
       sudo: false
       cache: false
       language: python
-      python: '3'
+      python: '3.6'
       install:
         - set -o errexit; source .travis/lint_04_install.sh
       before_script:
