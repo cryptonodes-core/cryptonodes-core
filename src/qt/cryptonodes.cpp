@@ -31,7 +31,6 @@
 #include "init.h"
 #include "main.h"
 #include "rpcserver.h"
-#include "scheduler.h"
 #include "ui_interface.h"
 #include "util.h"
 
@@ -167,9 +166,6 @@ signals:
     void runawayException(const QString& message);
 
 private:
-    boost::thread_group threadGroup;
-    CScheduler scheduler;
-
     /// Flag indicating a restart
     bool execute_restart;
 

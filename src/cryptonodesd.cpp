@@ -51,10 +51,7 @@ void WaitForShutdown()
         MilliSleep(200);
         fShutdown = ShutdownRequested();
     }
-    if (threadGroup) {
-        threadGroup->interrupt_all();
-        threadGroup->join_all();
-    }
+    Interrupt();
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -63,10 +60,6 @@ void WaitForShutdown()
 //
 bool AppInit(int argc, char* argv[])
 {
-    boost::thread_group threadGroup;
-    CScheduler scheduler;
-    boost::thread* detectShutdownThread = NULL;
-
     bool fRet = false;
 
     //
