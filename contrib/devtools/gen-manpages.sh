@@ -7,10 +7,10 @@ BUILDDIR=${BUILDDIR:-$TOPDIR}
 BINDIR=${BINDIR:-$BUILDDIR/src}
 MANDIR=${MANDIR:-$TOPDIR/doc/man}
 
-BITCOINGREEND=${BITCOINGREEND:-$BINDIR/bitcoingreend}
-BITCOINGREENCLI=${BITCOINGREENCLI:-$BINDIR/bitcoingreen-cli}
-BITCOINGREENTX=${BITCOINGREENTX:-$BINDIR/bitcoingreen-tx}
-BITCOINGREENQT=${BITCOINGREENQT:-$BINDIR/qt/bitcoingreen-qt}
+BITCOINGREEND=${BITCOINGREEND:-$BINDIR/cryptonodesd}
+BITCOINGREENCLI=${BITCOINGREENCLI:-$BINDIR/cryptonodes-cli}
+BITCOINGREENTX=${BITCOINGREENTX:-$BINDIR/cryptonodes-tx}
+BITCOINGREENQT=${BITCOINGREENQT:-$BINDIR/qt/cryptonodes-qt}
 
 [ ! -x $BITCOINGREEND ] && echo "$BITCOINGREEND not found or not executable." && exit 1
 
@@ -18,8 +18,8 @@ BITCOINGREENQT=${BITCOINGREENQT:-$BINDIR/qt/bitcoingreen-qt}
 BTCVER=($($BITCOINGREENCLI --version | head -n1 | awk -F'[ -]' '{ print $6, $7 }'))
 
 # Create a footer file with copyright content.
-# This gets autodetected fine for bitcoingreend if --version-string is not set,
-# but has different outcomes for bitcoin-qt and bitcoingreen-cli.
+# This gets autodetected fine for cryptonodesd if --version-string is not set,
+# but has different outcomes for bitcoin-qt and cryptonodes-cli.
 echo "[COPYRIGHT]" > footer.h2m
 $BITCOINGREEND --version | sed -n '1!p' >> footer.h2m
 
