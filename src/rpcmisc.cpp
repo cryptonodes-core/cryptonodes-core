@@ -556,6 +556,7 @@ UniValue getstakingstatus(const UniValue& params, bool fHelp)
             "  \"mnsync\": true|false,             (boolean) if masternode data is synced\n"
             "  \"staking status\": true|false,     (boolean) if the wallet is staking or not\n"
             "}\n"
+
             "\nExamples:\n" +
             HelpExampleCli("getstakingstatus", "") + HelpExampleRpc("getstakingstatus", ""));
 

@@ -30,14 +30,17 @@ Common `host-platform-triplets` for cross compilation are:
 
 No other options are needed, the paths are automatically configured.
 
-Install the required dependencies: Ubuntu & Debian
---------------------------------------------------
+### Install the required dependencies: Ubuntu & Debian
 
-For macOS cross compilation:
+#### For macOS cross compilation
 
     sudo apt-get install curl librsvg2-bin libtiff-tools bsdmainutils cmake imagemagick libcap-dev libz-dev libbz2-dev python-setuptools
 
-For linux (including i386, ARM) cross compilation:
+#### For Win32/Win64 cross compilation
+
+- see [build-windows.md](../doc/build-windows.md#cross-compilation-for-ubuntu-and-windows-subsystem-for-linux)
+
+#### For linux (including i386, ARM) cross compilation
 
 Common linux dependencies:
 
