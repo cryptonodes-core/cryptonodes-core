@@ -223,6 +223,7 @@ UniValue listmasternodes(const UniValue& params, bool fHelp)
             "  }\n"
             "  ,...\n"
             "]\n"
+
             "\nExamples:\n" +
             HelpExampleCli("listmasternodes", "") + HelpExampleRpc("listmasternodes", ""));
 
@@ -313,6 +314,7 @@ UniValue getmasternodecount (const UniValue& params, bool fHelp)
             "  \"enabled\": n,      (numeric) Enabled masternodes\n"
             "  \"inqueue\": n       (numeric) Masternodes in queue\n"
             "}\n"
+
             "\nExamples:\n" +
             HelpExampleCli("getmasternodecount", "") + HelpExampleRpc("getmasternodecount", ""));
 
@@ -351,6 +353,7 @@ UniValue masternodecurrent (const UniValue& params, bool fHelp)
             "  \"lastseen\": xxx,       (numeric) Time since epoch of last seen\n"
             "  \"activeseconds\": xxx,  (numeric) Seconds MN has been active\n"
             "}\n"
+
             "\nExamples:\n" +
             HelpExampleCli("masternodecurrent", "") + HelpExampleRpc("masternodecurrent", ""));
 
@@ -378,6 +381,7 @@ UniValue masternodedebug (const UniValue& params, bool fHelp)
 
             "\nResult:\n"
             "\"status\"     (string) Masternode status message\n"
+
             "\nExamples:\n" +
             HelpExampleCli("masternodedebug", "") + HelpExampleRpc("masternodedebug", ""));
 
@@ -435,6 +439,7 @@ UniValue startmasternode (const UniValue& params, bool fHelp)
             "    ,...\n"
             "  ]\n"
             "}\n"
+
             "\nExamples:\n" +
             HelpExampleCli("startmasternode", "\"alias\" \"0\" \"my_mn\"") + HelpExampleRpc("startmasternode", "\"alias\" \"0\" \"my_mn\""));
 
@@ -576,6 +581,7 @@ UniValue createmasternodekey (const UniValue& params, bool fHelp)
 
             "\nResult:\n"
             "\"key\"    (string) Masternode private key\n"
+
             "\nExamples:\n" +
             HelpExampleCli("createmasternodekey", "") + HelpExampleRpc("createmasternodekey", ""));
 
@@ -755,6 +761,7 @@ UniValue getmasternodewinners (const UniValue& params, bool fHelp)
             "  }\n"
             "  ,...\n"
             "]\n"
+
             "\nExamples:\n" +
             HelpExampleCli("getmasternodewinners", "") + HelpExampleRpc("getmasternodewinners", ""));
 
@@ -813,7 +820,7 @@ UniValue getmasternodewinners (const UniValue& params, bool fHelp)
             obj.push_back(Pair("winner", winner));
         }
 
-            ret.push_back(obj);
+        ret.push_back(obj);
     }
 
     return ret;
@@ -834,6 +841,7 @@ UniValue getmasternodescores (const UniValue& params, bool fHelp)
             "  xxxx: \"xxxx\"   (numeric : string) Block height : Masternode hash\n"
             "  ,...\n"
             "}\n"
+
             "\nExamples:\n" +
             HelpExampleCli("getmasternodescores", "") + HelpExampleRpc("getmasternodescores", ""));
 
