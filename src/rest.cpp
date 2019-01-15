@@ -7,6 +7,7 @@
 #include "primitives/block.h"
 #include "primitives/transaction.h"
 #include "main.h"
+#include "httpserver.h"
 #include "rpcserver.h"
 #include "streams.h"
 #include "sync.h"
