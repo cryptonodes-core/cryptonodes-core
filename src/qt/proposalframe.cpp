@@ -6,6 +6,7 @@
 
 #include "masternode-budget.h"
 #include "masternodeconfig.h"
+#include "masternode-helpers.h"
 #include "masternodeman.h"
 #include "utilmoneystr.h"
 
@@ -273,6 +274,12 @@ void ProposalFrame::SendVote(std::string strHash, int nVote)
         CKey keyCollateralAddress;
         CPubKey pubKeyMasternode;
         CKey keyMasternode;
+
+        if (!masternodeSigner.SetKey(mne.getPrivKey(), errorMessage, keyMasternode, pubKeyMasternode)) {
+            mnresult += mne.getAlias() + ": " + "Masternode signing error, could not set key correctly: " + errorMessage + "<br />";
+            failed++;
+            continue;
+        }
 
         CMasternode* pmn = mnodeman.Find(pubKeyMasternode);
         if (pmn == NULL) {
