@@ -84,7 +84,7 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel
     }
 
     // It doesn't make sense to show the checkbox for sending CNMC because you wouldn't check it anyway.
-    if (context == Context::Send_CNMC)
+    if (context == Context::Send_CNMC) {
         ui->stakingCheckBox->hide();
     }
 
