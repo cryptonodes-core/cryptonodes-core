@@ -1,5 +1,5 @@
 ---
-name: "cryptonodes-osx-1.4"
+name: "cryptonodes-osx-1.4.2"
 enable_cache: true
 suites:
 - "xenial"
