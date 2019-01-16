@@ -389,7 +389,16 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
         connect(masternodeAction, SIGNAL(triggered()), this, SLOT(gotoMasternodePage()));
     }
 
-    governanceAction = new QAction(QIcon(":/icons/governance"), tr("&Governance"), this);
+    QPixmap governanceIconInactive(":/icons/governance");
+    QPixmap governanceIconActive(":icons/governance_dark");
+    QIcon governanceIcon(governanceIconInactive);
+	
+	governanceIcon.addPixmap(proposalIconActive,QIcon::Selected,QIcon::On);
+    governanceIcon.addPixmap(proposalIconActive,QIcon::Selected,QIcon::Off);
+    governanceIcon.addPixmap(proposalIconActive,QIcon::Active,QIcon::On);
+    governanceIcon.addPixmap(proposalIconActive,QIcon::Active,QIcon::Off);
+	
+    governanceAction = new QAction(governanceIcon, tr("&Governance"), this);
     governanceAction->setStatusTip(tr("Show Proposals"));
     governanceAction->setToolTip(governanceAction->statusTip());
     governanceAction->setCheckable(true);
