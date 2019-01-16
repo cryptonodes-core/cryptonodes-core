@@ -31,7 +31,6 @@
 #include "init.h"
 #include "main.h"
 #include "rpcserver.h"
-#include "scheduler.h"
 #include "ui_interface.h"
 #include "util.h"
 
@@ -167,9 +166,6 @@ signals:
     void runawayException(const QString& message);
 
 private:
-    boost::thread_group threadGroup;
-    CScheduler scheduler;
-
     /// Flag indicating a restart
     bool execute_restart;
 
@@ -253,7 +249,7 @@ void BitcoinCore::initialize()
 
     try {
         qDebug() << __func__ << ": Running AppInit2 in thread";
-        int rv = AppInit2(threadGroup, scheduler);
+        int rv = AppInit2();
         if (rv) {
             /* Start a dummy RPC thread if no RPC thread is active yet
              * to handle timeouts.
@@ -274,8 +270,7 @@ void BitcoinCore::restart(QStringList args)
         execute_restart = false;
         try {
             qDebug() << __func__ << ": Running Restart in thread";
-            threadGroup.interrupt_all();
-            threadGroup.join_all();
+            Interrupt();
             PrepareShutdown();
             qDebug() << __func__ << ": Shutdown finished";
             emit shutdownResult(1);
@@ -295,8 +290,7 @@ void BitcoinCore::shutdown()
 {
     try {
         qDebug() << __func__ << ": Running Shutdown in thread";
-        threadGroup.interrupt_all();
-        threadGroup.join_all();
+        Interrupt();
         Shutdown();
         qDebug() << __func__ << ": Shutdown finished";
         emit shutdownResult(1);

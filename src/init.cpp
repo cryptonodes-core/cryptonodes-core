@@ -165,6 +165,13 @@ static CCoinsViewDB* pcoinsdbview = NULL;
 static CCoinsViewErrorCatcher* pcoinscatcher = NULL;
 static boost::scoped_ptr<ECCVerifyHandle> globalVerifyHandle;
 
+static boost::thread_group threadGroup;
+static CScheduler scheduler;
+void Interrupt()
+{
+    InterruptTorControl();
+}
+
 /** Preparing steps before shutting down or restarting the wallet */
 void PrepareShutdown()
 {
@@ -190,12 +197,16 @@ void PrepareShutdown()
 #endif
     StopNode();
     InterruptTorControl();
-    StopTorControl();
     DumpMasternodes();
     DumpBudgets();
     DumpCommunityVotes();
     DumpMasternodePayments();
     UnregisterNodeSignals(GetNodeSignals());
+
+    // After everything has been shut down, but before things get flushed, stop the
+    // CScheduler/checkqueue threadGroup
+    threadGroup.interrupt_all();
+    threadGroup.join_all();
 
     if (fFeeEstimatesInitialized) {
         boost::filesystem::path est_path = GetDataDir() / FEE_ESTIMATES_FILENAME;
@@ -240,7 +251,11 @@ void PrepareShutdown()
 #endif
 
 #ifndef WIN32
-    boost::filesystem::remove(GetPidFile());
+    try {
+        boost::filesystem::remove(GetPidFile());
+    } catch (const boost::filesystem::filesystem_error& e) {
+        LogPrintf("%s: Unable to remove pidfile: %s\n", __func__, e.what());
+    }
 #endif
     UnregisterAllValidationInterfaces();
 }
@@ -260,8 +275,8 @@ void Shutdown()
     if (!fRestartRequested) {
         PrepareShutdown();
     }
-
-// Shutdown part 2: delete wallet instance
+    // Shutdown part 2: Stop TOR thread and delete wallet instance
+    StopTorControl();
 #ifdef ENABLE_WALLET
     delete pwalletMain;
     pwalletMain = NULL;
@@ -650,7 +665,7 @@ bool InitSanityCheck(void)
 /** Initialize cryptonodes.
  *  @pre Parameters should be parsed and config file should be read.
  */
-bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
+bool AppInit2()
 {
 // ********************************************************* Step 1: setup
 #ifdef _MSC_VER
