@@ -393,10 +393,10 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
     QPixmap governanceIconActive(":icons/governance_dark");
     QIcon governanceIcon(governanceIconInactive);
 	
-	governanceIcon.addPixmap(proposalIconActive,QIcon::Selected,QIcon::On);
-    governanceIcon.addPixmap(proposalIconActive,QIcon::Selected,QIcon::Off);
-    governanceIcon.addPixmap(proposalIconActive,QIcon::Active,QIcon::On);
-    governanceIcon.addPixmap(proposalIconActive,QIcon::Active,QIcon::Off);
+    governanceIcon.addPixmap(governanceIconActive,QIcon::Selected,QIcon::On);
+    governanceIcon.addPixmap(governanceIconActive,QIcon::Selected,QIcon::Off);
+    governanceIcon.addPixmap(governanceIconActive,QIcon::Active,QIcon::On);
+    governanceIcon.addPixmap(governanceIconActive,QIcon::Active,QIcon::Off);
 	
     governanceAction = new QAction(governanceIcon, tr("&Governance"), this);
     governanceAction->setStatusTip(tr("Show Proposals"));
