@@ -6,6 +6,7 @@
 
 #include "masternode-budget.h"
 #include "masternodeconfig.h"
+#include "masternode-helpers.h"
 #include "masternodeman.h"
 #include "utilmoneystr.h"
 
