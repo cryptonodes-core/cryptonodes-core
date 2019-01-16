@@ -76,14 +76,17 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel
     }
 
     // Set checkbox "For staking only" depending on from where we were called
-    if (context == Context::Unlock_Menu || context == Context::BIP_38)
+    if (context == Context::Unlock_Menu || context == Context::BIP_38 || context == Context::UI_Vote) {
         ui->stakingCheckBox->setChecked(true);
-    else
+    }
+    else {
         ui->stakingCheckBox->setChecked(false);
+    }
 
     // It doesn't make sense to show the checkbox for sending CNMC because you wouldn't check it anyway.
     if (context == Context::Send_CNMC)
         ui->stakingCheckBox->hide();
+    }
 
     textChanged();
     connect(ui->passEdit1, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
