@@ -238,6 +238,7 @@ RES_ICONS = \
   qt/res/icons/remove_black.png \
   qt/res/icons/send.png \
   qt/res/icons/send_active.png \
+  qt/res/icons/send_black.png \
   qt/res/icons/governance.png \
   qt/res/icons/governance_dark.png \
   qt/res/icons/staking_active.png \
