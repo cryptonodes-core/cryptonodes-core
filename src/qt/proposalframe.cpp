@@ -274,6 +274,12 @@ void ProposalFrame::SendVote(std::string strHash, int nVote)
         CPubKey pubKeyMasternode;
         CKey keyMasternode;
 
+        if (!masternodeSigner.SetKey(mne.getPrivKey(), errorMessage, keyMasternode, pubKeyMasternode)) {
+            mnresult += mne.getAlias() + ": " + "Masternode signing error, could not set key correctly: " + errorMessage + "<br />";
+            failed++;
+            continue;
+        }
+
         CMasternode* pmn = mnodeman.Find(pubKeyMasternode);
         if (pmn == NULL) {
             mnresult += mne.getAlias() + ": " + "Can't find masternode by pubkey" + "<br />";
