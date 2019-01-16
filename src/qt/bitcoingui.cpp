@@ -89,6 +89,7 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMai
                                                                             multisigSignAction(0),
                                                                             aboutAction(0),
                                                                             receiveCoinsAction(0),
+                                                                            governanceAction(0),
                                                                             optionsAction(0),
                                                                             toggleHideAction(0),
                                                                             encryptWalletAction(0),
@@ -388,6 +389,17 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
         connect(masternodeAction, SIGNAL(triggered()), this, SLOT(gotoMasternodePage()));
     }
 
+    governanceAction = new QAction(QIcon(":/icons/governance"), tr("&Governance"), this);
+    governanceAction->setStatusTip(tr("Show Proposals"));
+    governanceAction->setToolTip(governanceAction->statusTip());
+    governanceAction->setCheckable(true);
+#ifdef Q_OS_MAC
+    governanceAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_7));
+#else
+    governanceAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_7));
+#endif
+    tabGroup->addAction(governanceAction);
+
     // These showNormalIfMinimized are needed because Send Coins and Receive Coins
     // can be triggered from the tray menu, and need to show the GUI to be useful.
     connect(overviewAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
@@ -398,6 +410,7 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
     connect(receiveCoinsAction, SIGNAL(triggered()), this, SLOT(gotoReceiveCoinsPage()));
     connect(historyAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(historyAction, SIGNAL(triggered()), this, SLOT(gotoHistoryPage()));
+    connect(governanceAction, SIGNAL(triggered()), this, SLOT(gotoGovernancePage()));
 #endif // ENABLE_WALLET
 
     quitAction = new QAction(QIcon(":/icons/quit"), tr("E&xit"), this);
@@ -576,6 +589,7 @@ void BitcoinGUI::createToolBars()
         if (settings.value("fShowMasternodesTab").toBool()) {
             toolbar->addAction(masternodeAction);
         }
+        toolbar->addAction(governanceAction);
         toolbar->setMovable(false); // remove unused icon in upper left corner
         overviewAction->setChecked(true);
 
@@ -811,6 +825,12 @@ void BitcoinGUI::gotoMasternodePage()
         masternodeAction->setChecked(true);
         if (walletFrame) walletFrame->gotoMasternodePage();
     }
+}
+
+void BitcoinGUI::gotoGovernancePage()
+{
+    governanceAction->setChecked(true);
+    if (walletFrame) walletFrame->gotoGovernancePage();
 }
 
 void BitcoinGUI::gotoReceiveCoinsPage()
