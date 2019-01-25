@@ -770,35 +770,17 @@ std::vector<CBudgetProposal*> CBudgetManager::GetBudget()
     }
 
     std::sort(vBudgetPorposalsSort.begin(), vBudgetPorposalsSort.end(), sortProposalsByVotes());
-    
+
+    // ------- Grab The Budgets In Order
+
     std::vector<CBudgetProposal*> vBudgetProposalsRet;
 
     CAmount nBudgetAllocated = 0;
     CBlockIndex* pindexPrev = chainActive.Tip();
     if (pindexPrev == NULL) return vBudgetProposalsRet;
 
-    // Grab The Highest Count
-
-    int nHighestCount = 0;
-    int nBlockHeight = pindexPrev->nHeight + 1;
-
-    std::map<uint256, CBudgetProposal>::iterator it1 = mapProposals.begin();
-    while (it1 != mapProposals.end()) {
-        CBudgetProposal* pBudgetProposal = &((*it1).second);
-        if ((int)pBudgetProposal->mapVotes.size() > nHighestCount &&
-            nBlockHeight >= pBudgetProposal->GetBlockStart() &&
-            nBlockHeight <= pBudgetProposal->GetBlockEnd()) {
-            nHighestCount = (int)pBudgetProposal->mapVotes.size();
-        }
-
-        ++it1;
-    }
-
-    // ------- Grab The Budgets In Order    
-
     int nBlockStart = pindexPrev->nHeight - pindexPrev->nHeight % GetBudgetPaymentCycleBlocks() + GetBudgetPaymentCycleBlocks();
     int nBlockEnd = nBlockStart + GetBudgetPaymentCycleBlocks() - 1;
-    int nCountThreshold = mnodeman.CountEnabled(ActiveProtocol()) / 2;
     CAmount nTotalBudget = GetTotalBudget(nBlockStart);
 
 
@@ -810,15 +792,13 @@ std::vector<CBudgetProposal*> CBudgetManager::GetBudget()
         //prop start/end should be inside this period
         if (pbudgetProposal->fValid && pbudgetProposal->nBlockStart <= nBlockStart &&
             pbudgetProposal->nBlockEnd >= nBlockEnd &&
-            // check the highest budget proposals (+/- 50% to assist in consensus)
-            (int)pbudgetProposal->mapVotes.size() >= nHighestCount - nCountThreshold &&
             pbudgetProposal->GetYeas() - pbudgetProposal->GetNays() > mnodeman.CountEnabled(ActiveProtocol()) / 2 &&
             pbudgetProposal->IsEstablished()) {
 
-            LogPrint("mnbudget","CBudgetManager::GetBudget() -   Check 1 passed: valid=%d | %ld <= %ld | %ld >= %ld | Yeas=%d Nays=%d Count=%d | Threshold=%d | established=%d\n",
+            LogPrint("mnbudget","CBudgetManager::GetBudget() -   Check 1 passed: valid=%d | %ld <= %ld | %ld >= %ld | Yeas=%d Nays=%d Count=%d | established=%d\n",
                       pbudgetProposal->fValid, pbudgetProposal->nBlockStart, nBlockStart, pbudgetProposal->nBlockEnd,
                       nBlockEnd, pbudgetProposal->GetYeas(), pbudgetProposal->GetNays(), mnodeman.CountEnabled(ActiveProtocol()) / 2,
-                      nCountThreshold, pbudgetProposal->IsEstablished());
+                      pbudgetProposal->IsEstablished());
 
             if (pbudgetProposal->GetAmount() + nBudgetAllocated <= nTotalBudget) {
                 pbudgetProposal->SetAllotted(pbudgetProposal->GetAmount());
@@ -831,10 +811,10 @@ std::vector<CBudgetProposal*> CBudgetManager::GetBudget()
             }
         }
         else {
-            LogPrint("mnbudget","CBudgetManager::GetBudget() -   Check 1 failed: valid=%d | %ld <= %ld | %ld >= %ld | Yeas=%d Nays=%d Count=%d | Threshold=%d | established=%d\n",
+            LogPrint("mnbudget","CBudgetManager::GetBudget() -   Check 1 failed: valid=%d | %ld <= %ld | %ld >= %ld | Yeas=%d Nays=%d Count=%d | established=%d\n",
                       pbudgetProposal->fValid, pbudgetProposal->nBlockStart, nBlockStart, pbudgetProposal->nBlockEnd,
                       nBlockEnd, pbudgetProposal->GetYeas(), pbudgetProposal->GetNays(), mnodeman.CountEnabled(ActiveProtocol()) / 2,
-                      nCountThreshold, pbudgetProposal->IsEstablished());
+                      pbudgetProposal->IsEstablished());
         }
 
         ++it2;
@@ -1516,12 +1496,12 @@ bool CBudgetProposal::IsValid(std::string& strError, bool fCheckCollateral)
     //if proposal doesn't gain traction within 2 weeks, remove it
     // nTime not being saved correctly
     // -- TODO: We should keep track of the last time the proposal was valid, if it's invalid for 2 weeks, erase it
-    if(nTime + (60*60*24*2) < GetAdjustedTime()) {
-        if(GetYeas()-GetNays() < (mnodeman.CountEnabled(ActiveProtocol())/2)) {
-            strError = "Not enough support";
-            return false;
-        }
-    }
+    // if(nTime + (60*60*24*2) < GetAdjustedTime()) {
+    //     if(GetYeas()-GetNays() < (mnodeman.CountEnabled(ActiveProtocol())/10)) {
+    //         strError = "Not enough support";
+    //         return false;
+    //     }
+    // }
 
     //can only pay out 10% of the possible coins (min value of coins)
     if (nAmount > budget.GetTotalBudget(nBlockStart)) {
