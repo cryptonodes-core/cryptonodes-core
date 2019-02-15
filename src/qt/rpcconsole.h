@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2017-2018 The PIVX developers
 // Copyright (c) 2018-2019 Cryptonodes Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -23,6 +24,7 @@ class RPCConsole;
 }
 
 QT_BEGIN_NAMESPACE
+class QMenu;
 class QItemSelection;
 QT_END_NAMESPACE
 

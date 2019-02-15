@@ -31,8 +31,14 @@
   <key>CFBundleExecutable</key>
   <string>Cryptonodes-Qt</string>
 
+  <key>CFBundleName</key>
+  <string>Cryptonodes-Qt</string>
+
+  <key>LSHasLocalizedDisplayName</key>
+  <true/>
+
   <key>CFBundleIdentifier</key>
-  <string>io.savebitcoin.Cryptonodes-Qt</string>
+  <string>ch.cryptonodes.Cryptonodes-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -40,7 +46,7 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>io.savebitcoin.CryptonodesPayment</string>
+      <string>ch.cryptonodes.CryptonodesPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>cryptonodes</string>

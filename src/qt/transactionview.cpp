@@ -25,6 +25,7 @@
 #include <QDesktopServices>
 #include <QDoubleValidator>
 #include <QHBoxLayout>
+#include <QHeaderView>
 #include <QLabel>
 #include <QLineEdit>
 #include <QMenu>
@@ -337,7 +338,7 @@ void TransactionView::exportClicked()
     // CSV is currently the only supported format
     QString filename = GUIUtil::getSaveFileName(this,
         tr("Export Transaction History"), QString(),
-        tr("Comma separated file (*.csv)"), NULL);
+        tr("Comma separated file (*.csv)"), nullptr);
 
     if (filename.isNull())
         return;
