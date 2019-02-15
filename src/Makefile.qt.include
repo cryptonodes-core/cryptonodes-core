@@ -413,7 +413,7 @@ $(srcdir)/qt/cryptonodesstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin
 	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
 	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
 
-translate: $(srcdir)/qt/cryptonodesstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/bitcoingreen.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+translate: $(srcdir)/qt/cryptonodesstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/cryptonodes.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
 	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/cryptonodes_en.ts
 

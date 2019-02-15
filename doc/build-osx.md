@@ -51,7 +51,7 @@ Instructions: Homebrew
         export LDFLAGS+=-L/usr/local/opt/openssl/lib
         export CPPFLAGS+=-I/usr/local/opt/openssl/include
 
-3.  Build bitcoingreend:
+3.  Build cryptonodesd:
 
         ./autogen.sh
         ./configure --with-gui=qt5

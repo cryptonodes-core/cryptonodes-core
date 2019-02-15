@@ -361,7 +361,7 @@ cryptonodesd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 cryptonodesd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-cryptonodesd_SOURCES += bitcoingreend-res.rc
+cryptonodesd_SOURCES += cryptonodesd-res.rc
 endif
 cryptonodesd_LDADD = \
   $(LIBBITCOIN_SERVER) \
@@ -379,7 +379,7 @@ cryptonodesd_LDADD = \
 cryptonodesd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
 # cryptonodes-cli binary #
-cryptonodes_cli_SOURCES = bitcoingreen-cli.cpp
+cryptonodes_cli_SOURCES = cryptonodes-cli.cpp
 cryptonodes_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
 cryptonodes_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 cryptonodes_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
@@ -398,13 +398,13 @@ cryptonodes_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
 # cryptonodes-tx binary #
-cryptonodes_tx_SOURCES = bitcoingreen-tx.cpp
+cryptonodes_tx_SOURCES = cryptonodes-tx.cpp
 cryptonodes_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 cryptonodes_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 cryptonodes_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-cryptonodes_tx_SOURCES += bitcoingreen-tx-res.rc
+cryptonodes_tx_SOURCES += cryptonodes-tx-res.rc
 endif
 
 cryptonodes_tx_LDADD = \

@@ -1,7 +1,7 @@
 <!--- Remove this description and sections that do not apply -->
 
-This issue tracker is only for technical issues related to Bitcoin Green Core.
-General Bitcoin Green questions and/or support requests and are best directed to the [Bitcoin Green Discord](https://discord.savebitcoin.io).
+This issue tracker is only for technical issues related to Cryptonodes Core.
+General Cryptonodes questions and/or support requests and are best directed to the [Cryptonodes Discord](https://discord.savebitcoin.io).
 
 ### Describe the issue
 
@@ -20,7 +20,7 @@ Tell us what happens instead
 ### Screenshots.
 If the issue is related to the GUI, screenshots can be added to this issue via drag & drop.
 
-### What version of Bitcoin Green Core are you using?
+### What version of Cryptonodes Core are you using?
 List the version number/commit ID, and if it is an official binary, self compiled or a distribution package.
 
 ### Machine specs:

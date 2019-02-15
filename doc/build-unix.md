@@ -89,7 +89,7 @@ BerkeleyDB 5.1 or later. This will break binary wallet compatibility with the di
 are based on BerkeleyDB 4.8. If you do not care about wallet compatibility,
 pass `--with-incompatible-bdb` to configure.
 
-To build Bitcoin Green Core without wallet, see [*Disable-wallet mode*](/doc/build-unix.md#disable-wallet-mode)
+To build Cryptonodes Core without wallet, see [*Disable-wallet mode*](/doc/build-unix.md#disable-wallet-mode)
 
 
 Optional (see --with-miniupnpc and --enable-upnp-default):
