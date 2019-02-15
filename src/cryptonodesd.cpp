@@ -16,10 +16,14 @@
 #include "rpcserver.h"
 #include "ui_interface.h"
 #include "util.h"
+#include "httpserver.h"
+#include "httprpc.h"
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/thread.hpp>
+
+#include <stdio.h>
 
 /* Introduction text for doxygen: */
 
@@ -143,7 +147,7 @@ bool AppInit(int argc, char* argv[])
     } catch (std::exception& e) {
         PrintExceptionContinue(&e, "AppInit()");
     } catch (...) {
-        PrintExceptionContinue(NULL, "AppInit()");
+        PrintExceptionContinue(nullptr, "AppInit()");
     }
 
     if (!fRet) {
