@@ -549,7 +549,7 @@ static UniValue SoftForkMajorityDesc(int minVersion, CBlockIndex* pindex, int nR
 {
     int nFound = 0;
     CBlockIndex* pstart = pindex;
-    for (int i = 0; i < Params().ToCheckBlockUpgradeMajority() && pstart != NULL; i++)
+    for (int i = 0; i < Params().ToCheckBlockUpgradeMajority() && pstart != nullptr; i++)
     {
         if (pstart->nVersion >= minVersion)
             ++nFound;

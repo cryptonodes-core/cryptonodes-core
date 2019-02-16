@@ -1,4 +1,5 @@
 // Copyright (c) 2017-2018 The Bitcoin Green Developers
+// Copyright (c) 2018-2019 The Cryptonodes Core Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -192,7 +193,7 @@ UniValue getcommunityinfo(const UniValue& params, bool fHelp)
     if (params.size() == 1) {
         std::string strProposalName = SanitizeString(params[0].get_str());
         CCommunityProposal* pcommunityProposal = communityVote.FindProposal(strProposalName);
-        if (pcommunityProposal == NULL) throw runtime_error("Unknown proposal name");
+        if (pcommunityProposal == nullptr) throw runtime_error("Unknown proposal name");
         UniValue bObj(UniValue::VOBJ);
         communityToJSON(pcommunityProposal, bObj);
         ret.push_back(bObj);
@@ -256,7 +257,7 @@ UniValue getcommunityproposalvotes(const UniValue& params, bool fHelp)
 
     CCommunityProposal* pcommunityProposal = communityVote.FindProposal(strProposalName);
 
-    if (pcommunityProposal == NULL) throw runtime_error("Unknown proposal name");
+    if (pcommunityProposal == nullptr) throw runtime_error("Unknown proposal name");
 
     std::map<uint256, CCommunityVote>::iterator it = pcommunityProposal->mapVotes.begin();
     while (it != pcommunityProposal->mapVotes.end()) {
@@ -342,7 +343,7 @@ UniValue mncommunityvote(const UniValue& params, bool fHelp)
             }
 
             CMasternode* pmn = mnodeman.Find(activeMasternode.vin);
-            if (pmn == NULL) {
+            if (pmn == nullptr) {
                 failed++;
                 statusObj.push_back(Pair("node", "local"));
                 statusObj.push_back(Pair("result", "failed"));
@@ -362,7 +363,7 @@ UniValue mncommunityvote(const UniValue& params, bool fHelp)
             }
 
             std::string strError = "";
-            if (communityVote.UpdateProposal(vote, NULL, strError)) {
+            if (communityVote.UpdateProposal(vote, nullptr, strError)) {
                 success++;
                 communityVote.mapSeenMasternodeCommunityVotes.insert(make_pair(vote.GetHash(), vote));
                 vote.Relay();
@@ -409,7 +410,7 @@ UniValue mncommunityvote(const UniValue& params, bool fHelp)
             }
 
             CMasternode* pmn = mnodeman.Find(pubKeyMasternode);
-            if (pmn == NULL) {
+            if (pmn == nullptr) {
                 failed++;
                 statusObj.push_back(Pair("node", mne.getAlias()));
                 statusObj.push_back(Pair("result", "failed"));
@@ -429,7 +430,7 @@ UniValue mncommunityvote(const UniValue& params, bool fHelp)
             }
 
             std::string strError = "";
-            if (communityVote.UpdateProposal(vote, NULL, strError)) {
+            if (communityVote.UpdateProposal(vote, nullptr, strError)) {
                 communityVote.mapSeenMasternodeCommunityVotes.insert(make_pair(vote.GetHash(), vote));
                 vote.Relay();
                 success++;
@@ -483,7 +484,7 @@ UniValue mncommunityvote(const UniValue& params, bool fHelp)
             }
 
             CMasternode* pmn = mnodeman.Find(pubKeyMasternode);
-            if(pmn == NULL)
+            if(pmn == nullptr)
             {
                 failed++;
                 statusObj.push_back(Pair("node", mne.getAlias()));
@@ -504,7 +505,7 @@ UniValue mncommunityvote(const UniValue& params, bool fHelp)
             }
 
             std::string strError = "";
-            if(communityVote.UpdateProposal(vote, NULL, strError)) {
+            if(communityVote.UpdateProposal(vote, nullptr, strError)) {
                 communityVote.mapSeenMasternodeCommunityVotes.insert(make_pair(vote.GetHash(), vote));
                 vote.Relay();
                 success++;
