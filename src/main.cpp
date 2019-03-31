@@ -195,7 +195,84 @@ struct CBlockReject {
     uint256 hashBlock;
 };
 
-/**
+
+class CNodeBlocks
+{
+public:
+    CNodeBlocks():
+            maxSize(0),
+            maxAvg(0)
+    {
+        maxSize = GetArg("-blockspamfiltermaxsize", DEFAULT_BLOCK_SPAM_FILTER_MAX_SIZE);
+        maxAvg = GetArg("-blockspamfiltermaxavg", DEFAULT_BLOCK_SPAM_FILTER_MAX_AVG);
+    }
+
+    bool onBlockReceived(int nHeight) {
+        if(nHeight > 0 && maxSize && maxAvg) {
+            addPoint(nHeight);
+            return true;
+        }
+        return false;
+    }
+
+    bool updateState(CValidationState& state, bool ret)
+    {
+        // No Blocks
+        size_t size = points.size();
+        if(size == 0)
+            return ret;
+
+        // Compute the number of the received blocks
+        size_t nBlocks = 0;
+        for(auto point : points)
+        {
+            nBlocks += point.second;
+        }
+
+        // Compute the average value per height
+        double nAvgValue = (double)nBlocks / size;
+
+        // Ban the node if try to spam
+        bool banNode = (nAvgValue >= 1.5 * maxAvg && size >= maxAvg) ||
+                       (nAvgValue >= maxAvg && nBlocks >= maxSize) ||
+                       (nBlocks >= maxSize * 3);
+        if(banNode)
+        {
+            // Clear the points and ban the node
+            points.clear();
+            return state.DoS(100, error("block-spam ban node for sending spam"));
+        }
+
+        return ret;
+    }
+
+private:
+    void addPoint(int height)
+    {
+        // Remove the last element in the list
+        if(points.size() == maxSize)
+        {
+            points.erase(points.begin());
+        }
+
+        // Add the point to the list
+        int occurrence = 0;
+        auto mi = points.find(height);
+        if (mi != points.end())
+            occurrence = (*mi).second;
+        occurrence++;
+        points[height] = occurrence;
+    }
+
+private:
+    std::map<int,int> points;
+    size_t maxSize;
+    size_t maxAvg;
+};
+
+
+
+ /**
  * Maintain validation-specific state about nodes, protected by cs_main, instead
  * by CNode's own locks. This simplifies asynchronous operation, where
  * processing of incoming data is done after the ProcessMessage call returns,
@@ -228,6 +305,8 @@ struct CNodeState {
     int nBlocksInFlight;
     //! Whether we consider this a preferred download peer.
     bool fPreferredDownload;
+
+    CNodeBlocks nodeBlocks;
 
     CNodeState()
     {
@@ -3382,51 +3461,88 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
     }
 
     int nHeight = pindex->nHeight;
+    int splitHeight = -1;
 
-    if (block.IsProofOfStake()) {
-        LOCK(cs_main);
+    if(IsSporkActive(SPORK_17_FAKE_STAKE_FIX) && block.GetBlockTime() >= GetSporkValue(SPORK_17_FAKE_STAKE_FIX)) {
 
-        CCoinsViewCache coins(pcoinsTip);
+        if (block.IsProofOfStake()) {
+            LOCK(cs_main);
 
-        if (!coins.HaveInputs(block.vtx[1])) {
-            // the inputs are spent at the chain tip so we should look at the recently spent outputs
+            // Blocks arrives in order, so if prev block is not the tip then we are on a fork.
+            // Extra info: duplicated blocks are skipping this checks, so we don't have to worry about those here.
+            bool isBlockFromFork = pindexPrev != nullptr && chainActive.Tip() != pindexPrev;
 
-            for (CTxIn in : block.vtx[1].vin) {
-                auto it = mapStakeSpent.find(in.prevout);
-                if (it == mapStakeSpent.end()) {
-                    return false;
+            // Coin stake
+            CTransaction &stakeTxIn = block.vtx[1];
+
+            // Inputs
+            std::vector<CTxIn> cnmcInputs;
+
+            for (CTxIn stakeIn : stakeTxIn.vin) {
+                    cnmcInputs.push_back(stakeIn);
                 }
-                if (it->second <= pindexPrev->nHeight) {
-                    return false;
+
+            const bool hasCNMCInputs = !cnmcInputs.empty();
+
+            // Check for serial double spent on the same block, TODO: Move this to the proper method..
+
+            for (CTransaction tx : block.vtx) {
+                for (CTxIn in: tx.vin) {
+                    if(tx.IsCoinStake()) continue;
+                    if(hasCNMCInputs)
+                        // Check if coinstake input is double spent inside the same block
+                        for (CTxIn cnmcIn : cnmcInputs){
+                            if(cnmcIn.prevout == in.prevout){
+                                // double spent coinstake input inside block
+                                return error("%s: double spent coinstake input inside block", __func__);
+                            }
+                        }
                 }
             }
-        }
 
-        // if this is on a fork
-        if (!chainActive.Contains(pindexPrev) && pindexPrev != NULL) {
-            // start at the block we're adding on to
-            CBlockIndex *last = pindexPrev;
+            // Check whether is a fork or not
+            if (isBlockFromFork) {
+                // start at the block we're adding on to
+                CBlockIndex *prev = pindexPrev;
 
-            // while that block is not on the main chain
-            while (!chainActive.Contains(last) && pindexPrev != NULL) {
+                int readBlock = 0;
                 CBlock bl;
-                ReadBlockFromDisk(bl, last);
-                // loop through every spent input from said block
-                for (CTransaction t : bl.vtx) {
-                    for (CTxIn in: t.vin) {
-                        // loop through every spent input in the staking transaction of the new block
-                        for (CTxIn stakeIn : block.vtx[1].vin) {
-                            // if they spend the same input
-                            if (stakeIn.prevout == in.prevout) {
-                                // reject the block
-                                return false;
+                // Go backwards on the forked chain up to the split
+                do {
+                    // Check if the forked chain is longer than the max reorg limit
+                    if(readBlock == Params().MaxReorganizationDepth()){
+                        // TODO: Remove this chain from disk.
+                        return error("%s: forked chain longer than maximum reorg limit", __func__);
+                    }
+
+                    if(!ReadBlockFromDisk(bl, prev))
+                    // Previous block not on disk
+                    return error("%s: previous block %s not on disk", __func__, prev->GetBlockHash().GetHex());
+                    // Increase amount of read blocks
+                    readBlock++;
+                    // Loop through every input from said block
+                    for (CTransaction t : bl.vtx) {
+                        for (CTxIn in: t.vin) {
+                            // Loop through every input of the staking tx
+                            for (CTxIn stakeIn : cnmcInputs) {
+                                // if it's already spent
+
+                                // First regular staking check
+                                if(hasCNMCInputs) {
+                                    if (stakeIn.prevout == in.prevout) {
+                                        return state.DoS(100, error("%s: input already spent on a previous block", __func__));
+                                    }
+                                }
                             }
                         }
                     }
-                }
 
-                // go to the parent block
-                last = pindexPrev->pprev;
+                    prev = prev->pprev;
+
+                  } while (!chainActive.Contains(prev));
+
+                  // Split height
+                  splitHeight = prev->nHeight;
             }
         }
     }
@@ -3546,14 +3662,33 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
         }
 
         // Store to disk
-        CBlockIndex* pindex = NULL;
+        CBlockIndex* pindex = nullptr;
         bool ret = AcceptBlock (*pblock, state, &pindex, dbp, checked);
         if (pindex && pfrom) {
             mapBlockSource[pindex->GetBlockHash ()] = pfrom->GetId ();
         }
         CheckBlockIndex ();
-        if (!ret)
-            return error ("%s : AcceptBlock FAILED", __func__);
+        if (!ret) {
+            // Check spamming
+            if(pindex && pfrom && GetBoolArg("-blockspamfilter", DEFAULT_BLOCK_SPAM_FILTER)) {
+                CNodeState *nodestate = State(pfrom->GetId());
+                if(nodestate != nullptr) {
+                    nodestate->nodeBlocks.onBlockReceived(pindex->nHeight);
+                    bool nodeStatus = true;
+                    // UpdateState will return false if the node is attacking us or update the score and return true.
+                    nodeStatus = nodestate->nodeBlocks.updateState(state, nodeStatus);
+                    int nDoS = 0;
+                    if (state.IsInvalid(nDoS)) {
+                        if (nDoS > 0)
+                            Misbehaving(pfrom->GetId(), nDoS);
+                        nodeStatus = false;
+                    }
+                    if (!nodeStatus)
+                        return error("%s : AcceptBlock FAILED - block spam protection", __func__);
+                }
+            }
+            return error("%s : AcceptBlock FAILED", __func__);
+        } // !ret
     }
 
     if (!ActivateBestChain(state, pblock, checked))
@@ -4897,7 +5032,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         bool ignoreFees = false;
         CTxIn vin;
         vector<unsigned char> vchSig;
-        int64_t sigTime;
 
         CInv inv(MSG_TX, tx.GetHash());
         pfrom->AddInventoryKnown(inv);
