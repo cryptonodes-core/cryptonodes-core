@@ -166,7 +166,7 @@ QGroupBox {
 QToolTip {
 	background-color:#fff;
 	color:#333;
-	border-style: none;
+	border: 1px solid #333;
 }
 
 /****************************************************************************************/
@@ -856,7 +856,7 @@ QLabel#labelOverviewHeaderRight {
 	background-repeat: no-repeat;
 }
 
-QWidget .QFrame#frame_Header { /* Header with Page-Title and PIVX-image */
+QWidget .QFrame#frame_Header { /* Header with Page-Title and CNMC-image */
 	min-width:400px;
 	background-color:#ffffff;
 }
@@ -1006,7 +1006,7 @@ QWidget .QFrame#frame_RecentTransactions QListView { /* Transaction List */
 /**************************** SEND DIALOG ***********************************************/
 
 QDialog#SendCoinsDialog {
-	background-color:#transparent;
+	background-color: transparent;
 }
 
 QDialog#SendCoinsDialog .QFrame#frameCoinControl { /* Coin Control Section */
