@@ -1006,7 +1006,7 @@ QWidget .QFrame#frame_RecentTransactions QListView { /* Transaction List */
 /**************************** SEND DIALOG ***********************************************/
 
 QDialog#SendCoinsDialog {
-	background-color: transparent;
+	background-color:#fff;
 }
 
 QDialog#SendCoinsDialog .QFrame#frameCoinControl { /* Coin Control Section */
