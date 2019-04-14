@@ -548,7 +548,7 @@ void BitcoinGUI::createToolBars()
         toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
         QLabel* header = new QLabel();
-              header->setMinimumSize(255, 20);
+              header->setMinimumSize(128, 10);
               header->setMaximumSize(255, 20);
               header->setAlignment(Qt::AlignTop);
               header->setStyleSheet("background-color:transparent;");
@@ -581,7 +581,7 @@ void BitcoinGUI::createToolBars()
             // frameStatusBar->setStyleSheet(".QFrame { background-color: #000; }");
 
         QHBoxLayout* frameStatusBarLayout = new QHBoxLayout(frameStatusBar);
-        frameStatusBarLayout->setContentsMargins(0, 7, 0, 7);
+        frameStatusBarLayout->setContentsMargins(0, 5, 0, 5);
         frameStatusBarLayout->setSpacing(-10);
 
         unitDisplayControl = new UnitDisplayStatusBarControl();
