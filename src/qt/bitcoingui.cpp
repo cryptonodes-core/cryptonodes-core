@@ -168,7 +168,6 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMai
     createTrayIcon(networkStyle);
 
     // Create status bar
-    statusBar();
 
     // Status bar notification icons
     QFrame* frameBlocks = new QFrame();
@@ -177,56 +176,13 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMai
     QHBoxLayout* frameBlocksLayout = new QHBoxLayout(frameBlocks);
     frameBlocksLayout->setContentsMargins(3, 0, 3, 0);
     frameBlocksLayout->setSpacing(3);
-    unitDisplayControl = new UnitDisplayStatusBarControl();
-    labelStakingIcon = new QLabel();
-    labelEncryptionIcon = new QPushButton();
-    labelEncryptionIcon->setObjectName("labelEncryptionIcon");
-    labelEncryptionIcon->setFlat(true); // Make the button look like a label, but clickable
-    labelEncryptionIcon->setStyleSheet(".QPushButton { background-color: rgba(255, 255, 255, 0);}");
-    labelEncryptionIcon->setMaximumSize(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE);
-    labelConnectionsIcon = new QPushButton();
-    labelConnectionsIcon->setObjectName("labelConnectionsIcon");
-    labelConnectionsIcon->setFlat(true); // Make the button look like a label, but clickable
-    labelConnectionsIcon->setStyleSheet(".QPushButton { background-color: rgba(255, 255, 255, 0);}");
-    labelConnectionsIcon->setMaximumSize(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE);
-    labelBlocksIcon = new QLabel();
+    
 #ifdef ENABLE_WALLET
     if (enableWallet) {
-        frameBlocksLayout->addStretch();
-        frameBlocksLayout->addWidget(unitDisplayControl);
-        frameBlocksLayout->addStretch();
-        frameBlocksLayout->addWidget(labelEncryptionIcon);
-        frameBlocksLayout->addStretch();
-        frameBlocksLayout->addWidget(labelStakingIcon);
+        
     }
-#endif // ENABLE_WALLET
-    frameBlocksLayout->addStretch();
-    frameBlocksLayout->addWidget(labelConnectionsIcon);
-    frameBlocksLayout->addStretch();
-    frameBlocksLayout->addWidget(labelBlocksIcon);
-    frameBlocksLayout->addStretch();
+#endif 
 
-    // Progress bar and label for blocks download
-    progressBarLabel = new QLabel();
-    progressBarLabel->setVisible(true);
-    progressBarLabel->setObjectName("progressBarLabel");
-    progressBar = new GUIUtil::ProgressBar();
-    progressBar->setAlignment(Qt::AlignCenter);
-    progressBar->setVisible(true);
-
-    // Override style sheet for progress bar for styles that have a segmented progress bar,
-    // as they make the text unreadable (workaround for issue #1071)
-    // See https://doc.qt.io/qt-5/gallery.html
-    QString curStyle = QApplication::style()->metaObject()->className();
-    if (curStyle == "QWindowsStyle" || curStyle == "QWindowsXPStyle") {
-        progressBar->setStyleSheet("QProgressBar { background-color: #F8F8F8; border: 1px solid grey; border-radius: 7px; padding: 1px; text-align: center; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #00CCFF, stop: 1 #33CCFF); border-radius: 7px; margin: 0px; }");
-    }
-
-    statusBar()->addWidget(progressBarLabel);
-    statusBar()->addWidget(progressBar);
-    statusBar()->addPermanentWidget(frameBlocks);
-
-    // Jump directly to tabs in RPC-console
     connect(openInfoAction, SIGNAL(triggered()), rpcConsole, SLOT(showInfo()));
     connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole, SLOT(showConsole()));
     connect(openNetworkAction, SIGNAL(triggered()), rpcConsole, SLOT(showNetwork()));
@@ -590,6 +546,20 @@ void BitcoinGUI::createToolBars()
         QToolBar* toolbar = new QToolBar(tr("Tabs toolbar"));
         toolbar->setObjectName("Main-Toolbar"); // Name for CSS addressing
         toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+
+        QLabel* header = new QLabel();
+              header->setMinimumSize(128, 10);
+              header->setMaximumSize(255, 20);
+              header->setAlignment(Qt::AlignTop);
+              header->setStyleSheet("background-color:transparent;");
+              header->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        toolbar->addWidget(header);
+
+        QLabel* labelLogo = new QLabel;
+        labelLogo->setPixmap(QIcon(":/images/cryptonodes_logo_horizontal").pixmap(210, 50));
+        labelLogo->setStyleSheet(".QLabel { text-align:center; margin: 2em 0 2em 2em; }");
+        toolbar->addWidget(labelLogo);
+
         toolbar->addAction(overviewAction);
         toolbar->addAction(sendCoinsAction);
         toolbar->addAction(receiveCoinsAction);
@@ -599,17 +569,93 @@ void BitcoinGUI::createToolBars()
             toolbar->addAction(masternodeAction);
         }
         toolbar->addAction(governanceAction);
+		toolbar->setOrientation(Qt::Vertical);
         toolbar->setMovable(false); // remove unused icon in upper left corner
+        toolbar->setFloatable(false);
+
         overviewAction->setChecked(true);
+
+        QFrame* frameStatusBar = new QFrame;
+        frameStatusBar->setContentsMargins(0, 5, 5, 5);
+        frameStatusBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+            // frameStatusBar->setStyleSheet(".QFrame { background-color: #000; }");
+
+        QHBoxLayout* frameStatusBarLayout = new QHBoxLayout(frameStatusBar);
+        frameStatusBarLayout->setContentsMargins(0, 5, 0, 5);
+        frameStatusBarLayout->setSpacing(-10);
+
+        unitDisplayControl = new UnitDisplayStatusBarControl();
+        labelStakingIcon = new QLabel();
+        labelEncryptionIcon = new QPushButton();
+        labelEncryptionIcon->setObjectName("labelEncryptionIcon");
+        labelEncryptionIcon->setFlat(true); // Make the button look like a label, but clickable
+        labelEncryptionIcon->setStyleSheet(".QPushButton { background-color: rgba(255, 255, 255, 0);}");
+        labelEncryptionIcon->setMaximumSize(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE);
+        labelConnectionsIcon = new QPushButton();
+        labelConnectionsIcon->setObjectName("labelConnectionsIcon");
+        labelConnectionsIcon->setFlat(true); // Make the button look like a label, but clickable
+        labelConnectionsIcon->setStyleSheet(".QPushButton { background-color: rgba(255, 255, 255, 0);}");
+        labelConnectionsIcon->setMaximumSize(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE);
+        labelBlocksIcon = new QLabel();
+
+#ifdef ENABLE_WALLET
+    if (enableWallet) {
+        frameStatusBarLayout->addStretch();
+        frameStatusBarLayout->addWidget(unitDisplayControl);
+        frameStatusBarLayout->addStretch();
+        frameStatusBarLayout->addWidget(labelEncryptionIcon);
+        frameStatusBarLayout->addStretch();
+        frameStatusBarLayout->addWidget(labelStakingIcon);
+    }
+#endif // ENABLE_WALLET
+
+        frameStatusBarLayout->addStretch();
+        frameStatusBarLayout->addWidget(labelConnectionsIcon);
+        frameStatusBarLayout->addStretch();
+        frameStatusBarLayout->addWidget(labelBlocksIcon);
+        frameStatusBarLayout->addStretch();
+
+        progressBarLabel = new QLabel();
+        progressBarLabel->setVisible(true);
+        progressBarLabel->setAlignment(Qt::AlignCenter);
+        progressBarLabel->setObjectName("progressBarLabel");
+        progressBar = new GUIUtil::ProgressBar();
+        progressBar->setAlignment(Qt::AlignCenter);
+        progressBar->setVisible(true);
+
+        // Override style sheet for progress bar for styles that have a segmented progress bar,
+        // as they make the text unreadable (workaround for issue #1071)
+        // See https://doc.qt.io/qt-5/gallery.html
+        QString curStyle = QApplication::style()->metaObject()->className();
+       if (curStyle == "QWindowsStyle" || curStyle == "QWindowsXPStyle") {
+            progressBar->setStyleSheet("QProgressBar { background-color: #F8F8F8; border: 1px solid grey; border-radius: 7px; padding: 1px; text-align: center; font: 8px; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #00CCFF, stop: 1 #33CCFF); border-radius: 7px; margin: 0px; font: 8px; }");
+        }
+
+        QFrame* frameToolbar = new QFrame;
+        frameToolbar->setContentsMargins(0, 0, 0, 0);
+        frameToolbar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+        frameToolbar->setStyleSheet(".QFrame { margin-left:-0px; background-color: #376fc4; }");
+
+        QVBoxLayout* frameToolbarLayout = new QVBoxLayout(frameToolbar);
+        frameToolbarLayout->setContentsMargins(0, 0, 0, 0);
+        frameToolbarLayout->setSpacing(0);
+
+        frameToolbarLayout->addWidget(toolbar);
+        frameToolbarLayout->addStretch();
+        frameToolbarLayout->addWidget(progressBarLabel); // TODO: progressBarLabel + progressBar into a QHBoxLayout
+        frameToolbarLayout->addWidget(progressBar);
+        frameToolbarLayout->addStretch();
+        frameToolbarLayout->addWidget(frameStatusBar);
 
         /** Create additional container for toolbar and walletFrame and make it the central widget.
             This is a workaround mostly for toolbar styling on Mac OS but should work fine for every other OSes too.
         */
         QVBoxLayout* layout = new QVBoxLayout;
-        layout->addWidget(toolbar);
+        layout->addWidget(frameToolbar);
         layout->addWidget(walletFrame);
         layout->setSpacing(0);
         layout->setContentsMargins(QMargins());
+        layout->setDirection(QBoxLayout::LeftToRight);
         QWidget* containerWidget = new QWidget();
         containerWidget->setLayout(layout);
         setCentralWidget(containerWidget);
@@ -934,7 +980,6 @@ void BitcoinGUI::setNumBlocks(int count)
         return;
 
     // Prevent orphan statusbar messages (e.g. hover Quit in main menu, wait until chain-sync starts -> garbelled text)
-    statusBar()->clearMessage();
 
     // Acquire current block source
     enum BlockSource blockSource = clientModel->getBlockSource();
