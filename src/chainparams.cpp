@@ -51,12 +51,14 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
     (150000, uint256("0xc642a16c8fc84aea417c744fe3be197522bb220f8c2914f9eb4519bfa4842515"))
     (200000, uint256("1872d47d22b049cec00b3f6859c6e6cd20a804dc2d9936a48439b8c96948b60b"))
     (250000, uint256("d1b44dc74faf146ad816b9a9f655369e5e6c86a965c680e9c20540edc1335dd8"))
-    (290000, uint256("add10cffef2901881adebb2038608c5297a66990f5fa8981ccfff0206f6a48a3"));
+    (300000, uint256("4390cddd62b6bd588e8f0de57509e52bf8c99ad321d0b6fafa9ca249cb3202f5"))
+    (350000, uint256("4165cd55872e403e3cdc7bb723e07cc709113739691c01f96411fab37bb73a4f"))
+    (400000, uint256("c3577247ee5a7d6a9fb84067f154fe3c25335dcf0312e465b6bbcbc8b6c341db"));
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1547483001, // * UNIX timestamp of last checkpoint block
-    674805,      // * total number of transactions between genesis and last checkpoint
+    1554180535, // * UNIX timestamp of last checkpoint block
+    899634,      // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     3000        // * estimated number of transactions per day after checkpoint
 };
@@ -132,6 +134,12 @@ public:
 
         // DNS Seeding
         vSeeds.push_back(CDNSSeedData("185.62.81.137", "185.62.81.137"));
+        vSeeds.push_back(CDNSSeedData("185.62.81.136", "185.62.81.136"));
+        vSeeds.push_back(CDNSSeedData("185.62.81.135", "185.62.81.135"));
+        vSeeds.push_back(CDNSSeedData("185.62.81.134", "185.62.81.134"));
+        vSeeds.push_back(CDNSSeedData("185.62.81.133", "185.62.81.133"));
+        vSeeds.push_back(CDNSSeedData("185.62.81.132", "185.62.81.132"));
+        vSeeds.push_back(CDNSSeedData("185.62.81.131", "185.62.81.131"));
 
         // Cryptonodes addresses start with 'c'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 88);
