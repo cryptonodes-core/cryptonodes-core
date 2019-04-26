@@ -22,6 +22,7 @@
 
 WalletFrame {
 	border-image: url(':/images/walletFrame') 0 0 0 0 stretch stretch;
+	background-position: left bottom;
 	border-top: 0px solid #000;
 	margin: 0;
 	padding: 0;
@@ -69,6 +70,7 @@ QToolBar {
 	border: 0px solid #fff;
 	padding: 0;
 	margin: 0;
+	font-size: 13px;
 }
 
 QToolBar > QToolButton {
@@ -76,21 +78,29 @@ QToolBar > QToolButton {
 	border:0px solid #333;
 	selection-background-color:transparent;
 	min-height: 2.5em;
-	padding: 0em 1em;
+	padding: 0em 2em;
 	font-weight: bold;
 	font-size: 13px;
-	color: #fff;
+	color: #b8bfc8;
+	width: 190px;
+	height: 55px;
+	text-align: left;
 }
 
 QToolBar > QToolButton:checked {
-	background-color: #fff;
-	color:#333;
+	background-color: #134899;
+	color:#fff;
 	font-weight:bold;
+	border-right: 7px solid #000;
 }
 
 QToolBar > QToolButton:hover {
-	background-color: #fff;
-	color: #333;
+	background-color: #134899;
+	color: #fff;
+}
+
+QToolBar > QToolButton#ToolbarSpacer:hover:!selected {
+  background-color: #1851a7;
 }
 
 QMessageBox {
@@ -98,23 +108,30 @@ QMessageBox {
 }
 
 QProgressBar {
-	color: #AAAAAA;
+	color: #ffffff;
 	border: 1px solid transparent;
 	border-radius: 50px;
 	background-color: transparent;
 	border-style: none;
+	font: 12px;
+	text-align: center;
 }
 
 QProgressBar::chunk {
-	background-color: #376fc4;
-	width: 20px;
+	background-color: #134899;
+	width: 12px;
+	font: 12px;
+	text-align: center;
 }
 
 QLabel#progressBarLabel {
 	background-color: transparent;
-	color: #376fc4;
+	color: #fff;
 	padding-left: 5px;
 	padding-right: 5px;
+	font: 12px;
+	padding-top: 242px;
+	padding-bottom: 14px;
 }
 
 QTabWidget {
@@ -149,7 +166,7 @@ QGroupBox {
 QToolTip {
 	background-color:#fff;
 	color:#333;
-	border: 1px solid #333;
+	border-style: none;
 }
 
 /****************************************************************************************/
@@ -232,11 +249,6 @@ QPushButton:hover {
 QPushButton:pressed {
 	background-color: #0a58af;
 	border:1px solid #000000;
-}
-
-QPushButton:disabled{
-  border:1px solid #aaaaaa;
-	background-color:#bbbbbb;
 }
 
 /* Special handling for statusbar-icons (which are partly QPushButtons) */
@@ -835,6 +847,7 @@ QLabel#labelOverviewHeaderLeft {
 	font-weight:bold;
 	font-size:20px;
 	background-color:#ffffff;
+	padding-left:20px;
 }
 
 QLabel#labelOverviewHeaderRight {
@@ -843,7 +856,7 @@ QLabel#labelOverviewHeaderRight {
 	background-repeat: no-repeat;
 }
 
-QWidget .QFrame#frame_Header { /* Header with Page-Title and PIVX-image */
+QWidget .QFrame#frame_Header { /* Header with Page-Title and CNMC-image */
 	min-width:400px;
 	background-color:#ffffff;
 }
