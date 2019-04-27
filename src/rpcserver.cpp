@@ -342,6 +342,7 @@ static const CRPCCommand vRPCCommands[] =
         {"cryptonodes", "getmasternodestatus", &getmasternodestatus, true, true, false},
         {"cryptonodes", "getmasternodewinners", &getmasternodewinners, true, true, false},
         {"cryptonodes", "getmasternodescores", &getmasternodescores, true, true, false},
+        {"cryptonodes", "masternodebroadcast", &masternodebroadcast, true, true, false},
         {"cryptonodes", "mnbudget", &mnbudget, true, true, false},
         {"cryptonodes", "preparebudget", &preparebudget, true, true, false},
         {"cryptonodes", "submitbudget", &submitbudget, true, true, false},
