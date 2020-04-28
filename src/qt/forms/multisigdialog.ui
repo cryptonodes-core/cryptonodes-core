@@ -4,8 +4,6 @@
  <widget class="QDialog" name="MultisigDialog">
   <property name="geometry">
    <rect>
-    <x>0</x>
-    <y>0</y>
     <width>801</width>
     <height>515</height>
    </rect>
@@ -16,12 +14,24 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>300</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Multisignature Address Interactions</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_8">
    <item>
     <widget class="QTabWidget" name="multisigTabWidget">
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>150</height>
+      </size>
+     </property>
      <property name="styleSheet">
       <string notr="true">QScrollArea{border: 1px solid #5b4c7c;}</string>
      </property>
@@ -34,6 +44,12 @@
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>250</height>
+       </size>
       </property>
       <attribute name="title">
        <string>Create MultiSignature &amp;Address</string>
@@ -48,6 +64,12 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>10</height>
+            </size>
            </property>
            <property name="toolTip">
             <string>How many people must sign to verify a transaction</string>
@@ -65,6 +87,12 @@
          </item>
          <item>
           <widget class="QLabel" name="enterMLabel">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>10</height>
+            </size>
+           </property>
            <property name="text">
             <string>Enter the minimum number of signatures required to sign transactions</string>
            </property>
@@ -76,13 +104,26 @@
         <layout class="QHBoxLayout" name="addressLabelLayout">
          <item>
           <widget class="QLabel" name="addressLableLabel">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>15</height>
+            </size>
+           </property>
            <property name="text">
             <string>Address Label:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="multisigAddressLabel"/>
+          <widget class="QLineEdit" name="multisigAddressLabel">
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>15</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -90,6 +131,12 @@
         <layout class="QHBoxLayout" name="addAddressLayout">
          <item>
           <widget class="QPushButton" name="addAddressButton">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Add another address that could sign to verify a transaction from the multisig address.</string>
            </property>
@@ -112,6 +159,12 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>10</height>
+            </size>
            </property>
            <property name="text">
             <string>Local addresses or public keys that can sign:</string>
@@ -141,17 +194,27 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>100</height>
+          </size>
+         </property>
          <property name="widgetResizable">
           <bool>true</bool>
          </property>
          <widget class="QWidget" name="addAddressWidget">
           <property name="geometry">
            <rect>
-            <x>0</x>
-            <y>0</y>
             <width>759</width>
-            <height>166</height>
+            <height>209</height>
            </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>100</height>
+           </size>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
@@ -184,6 +247,12 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>15</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Create a new multisig address</string>
            </property>
@@ -204,6 +273,12 @@
          </item>
          <item>
           <widget class="QLabel" name="label">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>50</height>
+            </size>
+           </property>
            <property name="text">
             <string>Status:</string>
            </property>
@@ -216,6 +291,12 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>50</height>
+            </size>
            </property>
            <property name="maximumSize">
             <size>
@@ -241,6 +322,12 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>20</height>
+          </size>
+         </property>
          <property name="text">
           <string>Use below to quickly import an address by its redeem. Don't forget to add a label before clicking import!
 Keep in mind, the wallet will rescan the blockchain to find transactions containing the new address.
@@ -264,6 +351,12 @@ Please be patient after clicking import.</string>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>75</width>
+             <height>15</height>
+            </size>
+           </property>
            <property name="text">
             <string>&amp;Import Redeem</string>
            </property>
@@ -281,6 +374,12 @@ Please be patient after clicking import.</string>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>15</height>
+            </size>
+           </property>
           </widget>
          </item>
         </layout>
@@ -288,6 +387,12 @@ Please be patient after clicking import.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="createTransactionTab">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>150</height>
+       </size>
+      </property>
       <attribute name="title">
        <string>&amp;Create MultiSignature Tx</string>
       </attribute>
@@ -306,6 +411,12 @@ Please be patient after clicking import.</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>20</width>
+                 <height>15</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Inputs:</string>
                </property>
@@ -319,6 +430,12 @@ Please be patient after clicking import.</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Coin Control</string>
                </property>
@@ -331,6 +448,12 @@ Please be patient after clicking import.</string>
                </property>
                <item row="0" column="0">
                 <widget class="QLabel" name="labelQuantity">
+                 <property name="minimumSize">
+                  <size>
+                   <width>75</width>
+                   <height>10</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Quantity Selected:</string>
                  </property>
@@ -338,6 +461,12 @@ Please be patient after clicking import.</string>
                </item>
                <item row="0" column="1">
                 <widget class="QLabel" name="labelQuantity_int">
+                 <property name="minimumSize">
+                  <size>
+                   <width>100</width>
+                   <height>10</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>0</string>
                  </property>
@@ -345,6 +474,12 @@ Please be patient after clicking import.</string>
                </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="labelAmount">
+                 <property name="minimumSize">
+                  <size>
+                   <width>35</width>
+                   <height>10</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Amount:</string>
                  </property>
@@ -352,6 +487,12 @@ Please be patient after clicking import.</string>
                </item>
                <item row="1" column="1">
                 <widget class="QLabel" name="labelAmount_int">
+                 <property name="minimumSize">
+                  <size>
+                   <width>100</width>
+                   <height>10</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>0</string>
                  </property>
@@ -366,6 +507,12 @@ Please be patient after clicking import.</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>20</height>
+                </size>
                </property>
                <property name="toolTip">
                 <string>Add an input to fund the outputs</string>
@@ -389,17 +536,27 @@ Please be patient after clicking import.</string>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>250</width>
+               <height>100</height>
+              </size>
+             </property>
              <property name="widgetResizable">
               <bool>true</bool>
              </property>
              <widget class="QWidget" name="txInputsWidget">
               <property name="geometry">
                <rect>
-                <x>0</x>
-                <y>0</y>
                 <width>747</width>
-                <height>131</height>
+                <height>146</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>250</width>
+                <height>100</height>
+               </size>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
                <item>
@@ -426,6 +583,12 @@ Please be patient after clicking import.</string>
             <layout class="QHBoxLayout" name="addDestinationLayout">
              <item>
               <widget class="QLabel" name="addDestinationLabel">
+               <property name="minimumSize">
+                <size>
+                 <width>75</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Address / Amount:</string>
                </property>
@@ -438,6 +601,12 @@ Please be patient after clicking import.</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>75</width>
+                 <height>20</height>
+                </size>
                </property>
                <property name="toolTip">
                 <string>Add destinations to send CNMC to</string>
@@ -474,17 +643,27 @@ Please be patient after clicking import.</string>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>250</width>
+               <height>100</height>
+              </size>
+             </property>
              <property name="widgetResizable">
               <bool>true</bool>
              </property>
              <widget class="QWidget" name="destinationsScrollAreaContents">
               <property name="geometry">
                <rect>
-                <x>0</x>
-                <y>0</y>
                 <width>747</width>
-                <height>130</height>
+                <height>146</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>250</width>
+                <height>100</height>
+               </size>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_11">
                <item>
@@ -520,7 +699,7 @@ Please be patient after clicking import.</string>
                <property name="minimumSize">
                 <size>
                  <width>150</width>
-                 <height>0</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="toolTip">
@@ -549,6 +728,12 @@ Please be patient after clicking import.</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>25</width>
+                 <height>50</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Status:</string>
                </property>
@@ -564,6 +749,12 @@ Please be patient after clicking import.</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>250</width>
+                 <height>50</height>
+                </size>
                </property>
                <property name="maximumSize">
                 <size>
@@ -591,6 +782,12 @@ Please be patient after clicking import.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="signMultisigTransaction">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>150</height>
+       </size>
+      </property>
       <property name="styleSheet">
        <string notr="true">txScrollArea:{
 	border: 1px solid #5b4c7c;
@@ -610,6 +807,12 @@ txScrollArea:{
         <layout class="QHBoxLayout" name="transactionHexLayout">
          <item>
           <widget class="QLabel" name="transactionHexLabel">
+           <property name="minimumSize">
+            <size>
+             <width>75</width>
+             <height>15</height>
+            </size>
+           </property>
            <property name="text">
             <string>Transaction Hex:</string>
            </property>
@@ -617,6 +820,12 @@ txScrollArea:{
          </item>
          <item>
           <widget class="QLineEdit" name="transactionHex">
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>15</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string/>
            </property>
@@ -641,7 +850,7 @@ txScrollArea:{
                <property name="minimumSize">
                 <size>
                  <width>150</width>
-                 <height>0</height>
+                 <height>15</height>
                 </size>
                </property>
                <property name="toolTip">
@@ -673,6 +882,12 @@ txScrollArea:{
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>15</height>
+                </size>
+               </property>
                <property name="toolTip">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;DISABLED until transaction has been signed enough times.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
@@ -701,6 +916,12 @@ txScrollArea:{
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>75</width>
+                   <height>15</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>Add private keys to sign the transaction with</string>
                  </property>
@@ -715,6 +936,12 @@ txScrollArea:{
                </item>
                <item>
                 <widget class="QLabel" name="addPrivKeyLabel">
+                 <property name="minimumSize">
+                  <size>
+                   <width>100</width>
+                   <height>15</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Sign with only private keys (Not Recommened)</string>
                  </property>
@@ -728,6 +955,12 @@ txScrollArea:{
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
               <widget class="QLabel" name="signButtonStatusLabel">
+               <property name="minimumSize">
+                <size>
+                 <width>20</width>
+                 <height>100</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Status:</string>
                </property>
@@ -740,6 +973,12 @@ txScrollArea:{
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>75</height>
+                </size>
                </property>
                <property name="maximumSize">
                 <size>
@@ -768,6 +1007,12 @@ txScrollArea:{
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>100</height>
+              </size>
+             </property>
              <property name="sizeAdjustPolicy">
               <enum>QAbstractScrollArea::AdjustToContents</enum>
              </property>
@@ -777,11 +1022,15 @@ txScrollArea:{
              <widget class="QWidget" name="keyScrollAreaContents">
               <property name="geometry">
                <rect>
-                <x>0</x>
-                <y>0</y>
                 <width>755</width>
-                <height>168</height>
+                <height>185</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>250</width>
+                <height>100</height>
+               </size>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_9">
                <item>

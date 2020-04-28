@@ -4,8 +4,6 @@
  <widget class="QDialog" name="Bip38ToolDialog">
   <property name="geometry">
    <rect>
-    <x>0</x>
-    <y>0</y>
     <width>700</width>
     <height>334</height>
    </rect>
@@ -19,16 +17,34 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="minimumSize">
+      <size>
+       <width>550</width>
+       <height>125</height>
+      </size>
+     </property>
      <property name="currentIndex">
       <number>1</number>
      </property>
      <widget class="QWidget" name="tabBip38Encrypt">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>100</height>
+       </size>
+      </property>
       <attribute name="title">
        <string>&amp;BIP 38 Encrypt</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_SM">
        <item>
         <widget class="QLabel" name="infoLabel_ENC">
+         <property name="minimumSize">
+          <size>
+           <width>500</width>
+           <height>40</height>
+          </size>
+         </property>
          <property name="text">
           <string>Enter a CNMC Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</string>
          </property>
@@ -50,7 +66,7 @@
            <property name="minimumSize">
             <size>
              <width>85</width>
-             <height>0</height>
+             <height>25</height>
             </size>
            </property>
            <property name="text">
@@ -60,6 +76,12 @@
          </item>
          <item>
           <widget class="QValidatedLineEdit" name="addressIn_ENC">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>The CNMC address to sign the message with</string>
            </property>
@@ -67,6 +89,12 @@
          </item>
          <item>
           <widget class="QToolButton" name="addressBookButton_ENC">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Choose previously used address</string>
            </property>
@@ -84,6 +112,12 @@
          </item>
          <item>
           <widget class="QToolButton" name="pasteButton_ENC">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Paste address from clipboard</string>
            </property>
@@ -111,7 +145,7 @@
            <property name="minimumSize">
             <size>
              <width>85</width>
-             <height>0</height>
+             <height>25</height>
             </size>
            </property>
            <property name="text">
@@ -121,6 +155,12 @@
          </item>
          <item>
           <widget class="QLineEdit" name="passphraseIn_ENC">
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="echoMode">
             <enum>QLineEdit::Password</enum>
            </property>
@@ -138,7 +178,7 @@
            <property name="minimumSize">
             <size>
              <width>85</width>
-             <height>0</height>
+             <height>25</height>
             </size>
            </property>
            <property name="text">
@@ -151,6 +191,12 @@
          </item>
          <item>
           <widget class="QLineEdit" name="encryptedKeyOut_ENC">
+           <property name="minimumSize">
+            <size>
+             <width>225</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <italic>true</italic>
@@ -163,6 +209,12 @@
          </item>
          <item>
           <widget class="QToolButton" name="copyKeyButton_ENC">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Copy the current signature to the system clipboard</string>
            </property>
@@ -181,6 +233,12 @@
         <layout class="QHBoxLayout" name="horizontalLayout_3_ENC">
          <item>
           <widget class="QPushButton" name="encryptKeyButton_ENC">
+           <property name="minimumSize">
+            <size>
+             <width>75</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Sign the message to prove you own this CNMC address</string>
            </property>
@@ -198,6 +256,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="clearButton_ENC">
+           <property name="minimumSize">
+            <size>
+             <width>75</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Reset all fields</string>
            </property>
@@ -228,6 +292,12 @@
          </item>
          <item>
           <widget class="QLabel" name="statusLabel_ENC">
+           <property name="minimumSize">
+            <size>
+             <width>15</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <weight>75</weight>
@@ -260,12 +330,24 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tabBip38Decrypt">
+      <property name="minimumSize">
+       <size>
+        <width>300</width>
+        <height>150</height>
+       </size>
+      </property>
       <attribute name="title">
        <string>&amp;BIP 38 Decrypt</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_VM">
        <item>
         <widget class="QLabel" name="infoLabel_DEC">
+         <property name="minimumSize">
+          <size>
+           <width>500</width>
+           <height>40</height>
+          </size>
+         </property>
          <property name="text">
           <string>Enter the BIP 38 encrypted private key. Enter the passphrase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking 'Import Address' will add this private key to the wallet.</string>
          </property>
@@ -287,7 +369,7 @@
            <property name="minimumSize">
             <size>
              <width>85</width>
-             <height>0</height>
+             <height>20</height>
             </size>
            </property>
            <property name="text">
@@ -297,6 +379,12 @@
          </item>
          <item>
           <widget class="QValidatedLineEdit" name="encryptedKeyIn_DEC">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>The CNMC address the message was signed with</string>
            </property>
@@ -304,6 +392,12 @@
          </item>
          <item>
           <widget class="QToolButton" name="pasteButton_DEC">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Paste address from clipboard</string>
            </property>
@@ -331,7 +425,7 @@
            <property name="minimumSize">
             <size>
              <width>85</width>
-             <height>0</height>
+             <height>20</height>
             </size>
            </property>
            <property name="text">
@@ -341,6 +435,12 @@
          </item>
          <item>
           <widget class="QLineEdit" name="passphraseIn_DEC">
+           <property name="minimumSize">
+            <size>
+             <width>225</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="echoMode">
             <enum>QLineEdit::Password</enum>
            </property>
@@ -352,6 +452,12 @@
         <layout class="QHBoxLayout" name="horizontalLayout_2_DEC">
          <item>
           <widget class="QPushButton" name="decryptKeyButton_DEC">
+           <property name="minimumSize">
+            <size>
+             <width>75</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Verify the message to ensure it was signed with the specified CNMC address</string>
            </property>
@@ -369,6 +475,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="clearButton_DEC">
+           <property name="minimumSize">
+            <size>
+             <width>75</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Reset all fields</string>
            </property>
@@ -399,6 +511,12 @@
          </item>
          <item>
           <widget class="QLabel" name="statusLabel_DEC">
+           <property name="minimumSize">
+            <size>
+             <width>15</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <weight>75</weight>
@@ -432,13 +550,26 @@
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QLabel" name="label_3">
+           <property name="minimumSize">
+            <size>
+             <width>75</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="text">
             <string>Decrypted Key:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QValidatedLineEdit" name="decryptedKeyOut_DEC"/>
+          <widget class="QValidatedLineEdit" name="decryptedKeyOut_DEC">
+           <property name="minimumSize">
+            <size>
+             <width>225</width>
+             <height>20</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -446,6 +577,12 @@
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
           <widget class="QPushButton" name="importAddressButton_DEC">
+           <property name="minimumSize">
+            <size>
+             <width>75</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="text">
             <string>Import Address</string>
            </property>
@@ -453,13 +590,26 @@
          </item>
          <item>
           <widget class="QLabel" name="label_4">
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="text">
             <string>Address:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="addressOut_DEC"/>
+          <widget class="QLineEdit" name="addressOut_DEC">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>20</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>

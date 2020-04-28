@@ -4,11 +4,15 @@
  <widget class="QStackedWidget" name="SendCoinsEntry">
   <property name="geometry">
    <rect>
-    <x>0</x>
-    <y>0</y>
     <width>729</width>
     <height>156</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>250</width>
+    <height>75</height>
+   </size>
   </property>
   <property name="focusPolicy">
    <enum>Qt::TabFocus</enum>
@@ -17,6 +21,12 @@
    <bool>false</bool>
   </property>
   <widget class="QFrame" name="SendCoins">
+   <property name="minimumSize">
+    <size>
+     <width>250</width>
+     <height>75</height>
+    </size>
+   </property>
    <property name="toolTip">
     <string>This is a normal payment.</string>
    </property>
@@ -32,6 +42,12 @@
     </property>
     <item row="0" column="0">
      <widget class="QLabel" name="payToLabel">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>15</height>
+       </size>
+      </property>
       <property name="text">
        <string>Pay &amp;To:</string>
       </property>
@@ -50,6 +66,12 @@
       </property>
       <item>
        <widget class="QValidatedLineEdit" name="payTo">
+        <property name="minimumSize">
+         <size>
+          <width>250</width>
+          <height>15</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>The CNMC address to send the payment to</string>
         </property>
@@ -57,6 +79,12 @@
       </item>
       <item>
        <widget class="QToolButton" name="addressBookButton">
+        <property name="minimumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Choose previously used address</string>
         </property>
@@ -74,6 +102,12 @@
       </item>
       <item>
        <widget class="QToolButton" name="pasteButton">
+        <property name="minimumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Paste address from clipboard</string>
         </property>
@@ -91,6 +125,12 @@
       </item>
       <item>
        <widget class="QToolButton" name="deleteButton">
+        <property name="minimumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Remove this entry</string>
         </property>
@@ -107,6 +147,12 @@
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="labelLabel">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>15</height>
+       </size>
+      </property>
       <property name="text">
        <string>&amp;Label:</string>
       </property>
@@ -120,6 +166,12 @@
     </item>
     <item row="1" column="1">
      <widget class="QLineEdit" name="addAsLabel">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>15</height>
+       </size>
+      </property>
       <property name="toolTip">
        <string>Enter a label for this address to add it to the list of used addresses</string>
       </property>
@@ -127,6 +179,12 @@
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="amountLabel">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>15</height>
+       </size>
+      </property>
       <property name="text">
        <string>A&amp;mount:</string>
       </property>
@@ -139,10 +197,23 @@
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="BitcoinAmountField" name="payAmount"/>
+     <widget class="BitcoinAmountField" name="payAmount">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>15</height>
+       </size>
+      </property>
+     </widget>
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="messageLabel">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>15</height>
+       </size>
+      </property>
       <property name="text">
        <string>Message:</string>
       </property>
@@ -153,6 +224,12 @@
     </item>
     <item row="3" column="1">
      <widget class="QLabel" name="messageTextLabel">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>20</height>
+       </size>
+      </property>
       <property name="toolTip">
        <string>A message that was attached to the cryptonodes: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Cryptonodes network.</string>
       </property>
@@ -164,6 +241,12 @@
    </layout>
   </widget>
   <widget class="QFrame" name="SendCoins_InsecurePaymentRequest">
+   <property name="minimumSize">
+    <size>
+     <width>75</width>
+     <height>15</height>
+    </size>
+   </property>
    <property name="palette">
     <palette>
      <active>
@@ -597,6 +680,12 @@
     </property>
     <item row="0" column="0">
      <widget class="QLabel" name="payToLabel_is">
+      <property name="minimumSize">
+       <size>
+        <width>35</width>
+        <height>40</height>
+       </size>
+      </property>
       <property name="text">
        <string>Pay To:</string>
       </property>
@@ -611,10 +700,23 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QLabel" name="payTo_is"/>
+       <widget class="QLabel" name="payTo_is">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>35</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QToolButton" name="deleteButton_is">
+        <property name="minimumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Remove this entry</string>
         </property>
@@ -631,6 +733,12 @@
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="memoLabel_is">
+      <property name="minimumSize">
+       <size>
+        <width>35</width>
+        <height>40</height>
+       </size>
+      </property>
       <property name="text">
        <string>Memo:</string>
       </property>
@@ -641,6 +749,12 @@
     </item>
     <item row="1" column="1">
      <widget class="QLabel" name="memoTextLabel_is">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>40</height>
+       </size>
+      </property>
       <property name="textFormat">
        <enum>Qt::PlainText</enum>
       </property>
@@ -648,6 +762,12 @@
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="amountLabel_is">
+      <property name="minimumSize">
+       <size>
+        <width>35</width>
+        <height>15</height>
+       </size>
+      </property>
       <property name="text">
        <string>A&amp;mount:</string>
       </property>
@@ -661,6 +781,12 @@
     </item>
     <item row="2" column="1">
      <widget class="BitcoinAmountField" name="payAmount_is">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>20</height>
+       </size>
+      </property>
       <property name="acceptDrops">
        <bool>false</bool>
       </property>
@@ -669,6 +795,12 @@
    </layout>
   </widget>
   <widget class="QFrame" name="SendCoins_SecurePaymentRequest">
+   <property name="minimumSize">
+    <size>
+     <width>75</width>
+     <height>20</height>
+    </size>
+   </property>
    <property name="palette">
     <palette>
      <active>
@@ -1129,6 +1261,12 @@
     </property>
     <item row="0" column="0">
      <widget class="QLabel" name="payToLabel_s">
+      <property name="minimumSize">
+       <size>
+        <width>35</width>
+        <height>40</height>
+       </size>
+      </property>
       <property name="text">
        <string>Pay To:</string>
       </property>
@@ -1144,6 +1282,12 @@
       </property>
       <item>
        <widget class="QLabel" name="payTo_s">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
@@ -1151,6 +1295,12 @@
       </item>
       <item>
        <widget class="QToolButton" name="deleteButton_s">
+        <property name="minimumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Remove this entry</string>
         </property>
@@ -1167,6 +1317,12 @@
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="memoLabel_s">
+      <property name="minimumSize">
+       <size>
+        <width>35</width>
+        <height>40</height>
+       </size>
+      </property>
       <property name="text">
        <string>Memo:</string>
       </property>
@@ -1177,6 +1333,12 @@
     </item>
     <item row="1" column="1">
      <widget class="QLabel" name="memoTextLabel_s">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>35</height>
+       </size>
+      </property>
       <property name="textFormat">
        <enum>Qt::PlainText</enum>
       </property>
@@ -1184,6 +1346,12 @@
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="amountLabel_s">
+      <property name="minimumSize">
+       <size>
+        <width>35</width>
+        <height>15</height>
+       </size>
+      </property>
       <property name="text">
        <string>A&amp;mount:</string>
       </property>
@@ -1197,6 +1365,12 @@
     </item>
     <item row="2" column="1">
      <widget class="BitcoinAmountField" name="payAmount_s">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>15</height>
+       </size>
+      </property>
       <property name="acceptDrops">
        <bool>false</bool>
       </property>

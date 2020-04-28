@@ -7,11 +7,15 @@
   </property>
   <property name="geometry">
    <rect>
-    <x>0</x>
-    <y>0</y>
     <width>978</width>
     <height>695</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>250</width>
+    <height>200</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Send Coins</string>
@@ -39,6 +43,12 @@
      </property>
      <item>
       <widget class="QFrame" name="frame_Header">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>50</height>
+        </size>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout_Header" stretch="0">
         <property name="leftMargin">
          <number>0</number>
@@ -135,8 +145,8 @@
       <widget class="QFrame" name="frame_BG">
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>0</height>
+         <width>250</width>
+         <height>200</height>
         </size>
        </property>
        <layout class="QVBoxLayout" name="layout_BG" stretch="0,0,0,0">
@@ -159,6 +169,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>200</height>
+           </size>
           </property>
           <property name="maximumSize">
            <size>
@@ -190,6 +206,12 @@
            </property>
            <item>
             <widget class="QFrame" name="frameCoinControl_BG">
+             <property name="minimumSize">
+              <size>
+               <width>250</width>
+               <height>200</height>
+              </size>
+             </property>
              <layout class="QVBoxLayout" name="verticalLayoutCoinControl" stretch="0,0,0,0,0,0">
               <property name="spacing">
                <number>1</number>
@@ -220,7 +242,7 @@
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
+                      <width>250</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -243,7 +265,7 @@
                    <widget class="Line" name="line">
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
+                      <width>250</width>
                       <height>1</height>
                      </size>
                     </property>
@@ -272,6 +294,12 @@
                 </property>
                 <item>
                  <widget class="QPushButton" name="pushButtonCoinControl">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>20</height>
+                   </size>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true"/>
                   </property>
@@ -285,6 +313,12 @@
                 </item>
                 <item>
                  <widget class="QLabel" name="labelCoinControlAutomaticallySelected">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>20</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>Coins automatically selected</string>
                   </property>
@@ -295,6 +329,12 @@
                 </item>
                 <item>
                  <widget class="QLabel" name="labelCoinControlInsuffFunds">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>20</height>
+                   </size>
+                  </property>
                   <property name="font">
                    <font>
                     <weight>75</weight>
@@ -337,8 +377,8 @@
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>0</width>
-                  <height>0</height>
+                  <width>200</width>
+                  <height>45</height>
                  </size>
                 </property>
                 <property name="styleSheet">
@@ -387,6 +427,12 @@
                      </property>
                      <item row="0" column="0">
                       <widget class="QLabel" name="labelCoinControlQuantityText">
+                       <property name="minimumSize">
+                        <size>
+                         <width>45</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
                          <weight>75</weight>
@@ -403,6 +449,12 @@
                      </item>
                      <item row="0" column="1">
                       <widget class="QLabel" name="labelCoinControlQuantity">
+                       <property name="minimumSize">
+                        <size>
+                         <width>5</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="cursor">
                         <cursorShape>IBeamCursor</cursorShape>
                        </property>
@@ -422,6 +474,12 @@
                      </item>
                      <item row="1" column="0">
                       <widget class="QLabel" name="labelCoinControlBytesText">
+                       <property name="minimumSize">
+                        <size>
+                         <width>20</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
                          <weight>75</weight>
@@ -435,6 +493,12 @@
                      </item>
                      <item row="1" column="1">
                       <widget class="QLabel" name="labelCoinControlBytes">
+                       <property name="minimumSize">
+                        <size>
+                         <width>5</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="cursor">
                         <cursorShape>IBeamCursor</cursorShape>
                        </property>
@@ -470,6 +534,12 @@
                      </property>
                      <item row="0" column="0">
                       <widget class="QLabel" name="labelCoinControlAmountText">
+                       <property name="minimumSize">
+                        <size>
+                         <width>45</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
                          <weight>75</weight>
@@ -486,6 +556,12 @@
                      </item>
                      <item row="0" column="1">
                       <widget class="QLabel" name="labelCoinControlAmount">
+                       <property name="minimumSize">
+                        <size>
+                         <width>45</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="cursor">
                         <cursorShape>IBeamCursor</cursorShape>
                        </property>
@@ -502,6 +578,12 @@
                      </item>
                      <item row="1" column="0">
                       <widget class="QLabel" name="labelCoinControlPriorityText">
+                       <property name="minimumSize">
+                        <size>
+                         <width>40</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
                          <weight>75</weight>
@@ -515,6 +597,12 @@
                      </item>
                      <item row="1" column="1">
                       <widget class="QLabel" name="labelCoinControlPriority">
+                       <property name="minimumSize">
+                        <size>
+                         <width>45</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="cursor">
                         <cursorShape>IBeamCursor</cursorShape>
                        </property>
@@ -550,6 +638,12 @@
                      </property>
                      <item row="0" column="0">
                       <widget class="QLabel" name="labelCoinControlFeeText">
+                       <property name="minimumSize">
+                        <size>
+                         <width>15</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
                          <weight>75</weight>
@@ -566,6 +660,12 @@
                      </item>
                      <item row="0" column="1">
                       <widget class="QLabel" name="labelCoinControlFee">
+                       <property name="minimumSize">
+                        <size>
+                         <width>45</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="cursor">
                         <cursorShape>IBeamCursor</cursorShape>
                        </property>
@@ -582,6 +682,12 @@
                      </item>
                      <item row="1" column="0">
                       <widget class="QLabel" name="labelCoinControlLowOutputText">
+                       <property name="minimumSize">
+                        <size>
+                         <width>20</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
                          <weight>75</weight>
@@ -595,6 +701,12 @@
                      </item>
                      <item row="1" column="1">
                       <widget class="QLabel" name="labelCoinControlLowOutput">
+                       <property name="minimumSize">
+                        <size>
+                         <width>15</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="cursor">
                         <cursorShape>IBeamCursor</cursorShape>
                        </property>
@@ -630,6 +742,12 @@
                      </property>
                      <item row="0" column="0">
                       <widget class="QLabel" name="labelCoinControlAfterFeeText">
+                       <property name="minimumSize">
+                        <size>
+                         <width>45</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
                          <weight>75</weight>
@@ -646,6 +764,12 @@
                      </item>
                      <item row="0" column="1">
                       <widget class="QLabel" name="labelCoinControlAfterFee">
+                       <property name="minimumSize">
+                        <size>
+                         <width>200</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="cursor">
                         <cursorShape>IBeamCursor</cursorShape>
                        </property>
@@ -662,6 +786,12 @@
                      </item>
                      <item row="1" column="0">
                       <widget class="QLabel" name="labelCoinControlChangeText">
+                       <property name="minimumSize">
+                        <size>
+                         <width>40</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
                          <weight>75</weight>
@@ -675,6 +805,12 @@
                      </item>
                      <item row="1" column="1">
                       <widget class="QLabel" name="labelCoinControlChange">
+                       <property name="minimumSize">
+                        <size>
+                         <width>200</width>
+                         <height>10</height>
+                        </size>
+                       </property>
                        <property name="cursor">
                         <cursorShape>IBeamCursor</cursorShape>
                        </property>
@@ -721,7 +857,7 @@
                   <property name="minimumSize">
                    <size>
                     <width>200</width>
-                    <height>0</height>
+                    <height>10</height>
                    </size>
                   </property>
                   <property name="maximumSize">
@@ -752,7 +888,7 @@
                   <property name="minimumSize">
                    <size>
                     <width>300</width>
-                    <height>0</height>
+                    <height>10</height>
                    </size>
                   </property>
                  </widget>
@@ -768,7 +904,7 @@
                   <property name="minimumSize">
                    <size>
                     <width>100</width>
-                    <height>0</height>
+                    <height>10</height>
                    </size>
                   </property>
                   <property name="text">
@@ -800,7 +936,7 @@
                   <property name="minimumSize">
                    <size>
                     <width>200</width>
-                    <height>0</height>
+                    <height>15</height>
                    </size>
                   </property>
                   <property name="maximumSize">
@@ -825,7 +961,7 @@
                   <property name="minimumSize">
                    <size>
                     <width>100</width>
-                    <height>0</height>
+                    <height>15</height>
                    </size>
                   </property>
                   <property name="maximumSize">
@@ -841,6 +977,12 @@
                 </item>
                 <item>
                  <widget class="QLabel" name="labelBlockSizeText">
+                  <property name="minimumSize">
+                   <size>
+                    <width>50</width>
+                    <height>15</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>UTXO Size:</string>
                   </property>
@@ -848,6 +990,12 @@
                 </item>
                 <item>
                  <widget class="QLabel" name="labelBlockSize">
+                  <property name="minimumSize">
+                   <size>
+                    <width>30</width>
+                    <height>15</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string>0 CNMC</string>
                   </property>
@@ -889,17 +1037,27 @@
         </item>
         <item>
          <widget class="QScrollArea" name="scrollArea">
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>50</height>
+           </size>
+          </property>
           <property name="widgetResizable">
            <bool>true</bool>
           </property>
           <widget class="QWidget" name="scrollAreaWidgetContents">
            <property name="geometry">
             <rect>
-             <x>0</x>
-             <y>0</y>
              <width>944</width>
              <height>69</height>
             </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>50</height>
+            </size>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1">
             <property name="leftMargin">
@@ -945,6 +1103,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>200</height>
+           </size>
           </property>
           <property name="maximumSize">
            <size>
@@ -1012,7 +1176,7 @@
                    <property name="minimumSize">
                     <size>
                      <width>85</width>
-                     <height>0</height>
+                     <height>10</height>
                     </size>
                    </property>
                    <property name="toolTip">
@@ -1025,6 +1189,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="labelSmartFee3">
+                   <property name="minimumSize">
+                    <size>
+                     <width>85</width>
+                     <height>10</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>Confirmation time:</string>
                    </property>
@@ -1035,6 +1205,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="labelSmartFeeNormal">
+                   <property name="minimumSize">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>normal</string>
                    </property>
@@ -1047,7 +1223,7 @@
                   <widget class="QSlider" name="sliderSmartFee">
                    <property name="minimumSize">
                     <size>
-                     <width>0</width>
+                     <width>100</width>
                      <height>24</height>
                     </size>
                    </property>
@@ -1079,6 +1255,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="labelSmartFeeFast">
+                   <property name="minimumSize">
+                    <size>
+                     <width>30</width>
+                     <height>15</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>fast</string>
                    </property>
@@ -1109,6 +1291,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="labelFeeEstimation">
+                   <property name="minimumSize">
+                    <size>
+                     <width>5</width>
+                     <height>15</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string/>
                    </property>
@@ -1119,6 +1307,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="labelSmartFee2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>15</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>(Smart fee not initialized yet. This usually takes a few blocks...)</string>
                    </property>
@@ -1182,6 +1376,12 @@
                        <verstretch>0</verstretch>
                       </sizepolicy>
                      </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>50</width>
+                       <height>15</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <weight>75</weight>
@@ -1198,6 +1398,12 @@
                    </item>
                    <item>
                     <widget class="QLabel" name="labelFeeMinimized">
+                     <property name="minimumSize">
+                      <size>
+                       <width>5</width>
+                       <height>15</height>
+                      </size>
+                     </property>
                      <property name="text">
                       <string/>
                      </property>
@@ -1205,6 +1411,12 @@
                    </item>
                    <item>
                     <widget class="QPushButton" name="buttonChooseFee">
+                     <property name="minimumSize">
+                      <size>
+                       <width>50</width>
+                       <height>15</height>
+                      </size>
+                     </property>
                      <property name="text">
                       <string>Choose...</string>
                      </property>
@@ -1212,6 +1424,12 @@
                    </item>
                    <item>
                     <widget class="QPushButton" name="buttonMinimizeFee">
+                     <property name="minimumSize">
+                      <size>
+                       <width>50</width>
+                       <height>15</height>
+                      </size>
+                     </property>
                      <property name="toolTip">
                       <string>collapse fee-settings</string>
                      </property>
@@ -1254,6 +1472,12 @@
              </item>
              <item>
               <widget class="QFrame" name="frameFeeSelection">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>100</height>
+                </size>
+               </property>
                <layout class="QVBoxLayout" name="verticalLayoutFee12">
                 <property name="spacing">
                  <number>0</number>
@@ -1305,6 +1529,12 @@
                    <layout class="QVBoxLayout" name="verticalLayoutFee9" stretch="0,1">
                     <item>
                      <widget class="QRadioButton" name="radioCustomFee">
+                      <property name="minimumSize">
+                       <size>
+                        <width>10</width>
+                        <height>10</height>
+                       </size>
+                      </property>
                       <property name="text">
                        <string/>
                       </property>
@@ -1330,6 +1560,12 @@
                   </item>
                   <item row="3" column="1">
                    <widget class="QLabel" name="labelCustomFee">
+                    <property name="minimumSize">
+                     <size>
+                      <width>50</width>
+                      <height>40</height>
+                     </size>
+                    </property>
                     <property name="text">
                      <string>Custom:</string>
                     </property>
@@ -1347,6 +1583,12 @@
                      <layout class="QHBoxLayout" name="horizontalLayoutFee13">
                       <item>
                        <widget class="QRadioButton" name="radioCustomPerKilobyte">
+                        <property name="minimumSize">
+                         <size>
+                          <width>50</width>
+                          <height>15</height>
+                         </size>
+                        </property>
                         <property name="toolTip">
                          <string>If the custom fee is set to 1000 uCNMCs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 uCNMCs in fee,&lt;br /&gt;while &quot;at least&quot; pays 1000 uCNMCs. For transactions bigger than a kilobyte both pay by kilobyte.</string>
                         </property>
@@ -1363,6 +1605,12 @@
                       </item>
                       <item>
                        <widget class="QRadioButton" name="radioCustomAtLeast">
+                        <property name="minimumSize">
+                         <size>
+                          <width>50</width>
+                          <height>15</height>
+                         </size>
+                        </property>
                         <property name="toolTip">
                          <string>If the custom fee is set to 1000 uCNMCs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 uCNMCs in fee,&lt;br /&gt;while &quot;total at least&quot; pays 1000 uCNMCs. For transactions bigger than a kilobyte both pay by kilobyte.</string>
                         </property>
@@ -1375,7 +1623,14 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="BitcoinAmountField" name="customFee"/>
+                       <widget class="BitcoinAmountField" name="customFee">
+                        <property name="minimumSize">
+                         <size>
+                          <width>150</width>
+                          <height>15</height>
+                         </size>
+                        </property>
+                       </widget>
                       </item>
                       <item>
                        <spacer name="horizontalSpacer_6">
@@ -1396,6 +1651,12 @@
                      <layout class="QHBoxLayout" name="horizontalLayoutFee8">
                       <item>
                        <widget class="QCheckBox" name="checkBoxMinimumFee">
+                        <property name="minimumSize">
+                         <size>
+                          <width>10</width>
+                          <height>10</height>
+                         </size>
+                        </property>
                         <property name="toolTip">
                          <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for Cryptonodes transactions than the network can process.</string>
                         </property>
@@ -1408,6 +1669,12 @@
                        <widget class="QLabel" name="labelMinFeeWarning">
                         <property name="enabled">
                          <bool>true</bool>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>50</width>
+                          <height>15</height>
+                         </size>
                         </property>
                         <property name="toolTip">
                          <string>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for Cryptonodes transactions than the network can process.</string>
@@ -1439,6 +1706,12 @@
                   </item>
                   <item row="1" column="1">
                    <widget class="QLabel" name="labelSmartFee_2">
+                    <property name="minimumSize">
+                     <size>
+                      <width>50</width>
+                      <height>15</height>
+                     </size>
+                    </property>
                     <property name="text">
                      <string>Recommended</string>
                     </property>
@@ -1446,6 +1719,12 @@
                   </item>
                   <item row="1" column="2">
                    <widget class="QLabel" name="labelSmartFee">
+                    <property name="minimumSize">
+                     <size>
+                      <width>5</width>
+                      <height>15</height>
+                     </size>
+                    </property>
                     <property name="text">
                      <string/>
                     </property>
@@ -1456,6 +1735,12 @@
                   </item>
                   <item row="1" column="0">
                    <widget class="QRadioButton" name="radioSmartFee">
+                    <property name="minimumSize">
+                     <size>
+                      <width>10</width>
+                      <height>10</height>
+                     </size>
+                    </property>
                     <property name="text">
                      <string/>
                     </property>
@@ -1482,7 +1767,7 @@
                      <widget class="Line" name="line_2">
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>100</width>
                         <height>1</height>
                        </size>
                       </property>
@@ -1554,6 +1839,12 @@
                   </property>
                   <item>
                    <widget class="QCheckBox" name="checkBoxFreeTx">
+                    <property name="minimumSize">
+                     <size>
+                      <width>150</width>
+                      <height>10</height>
+                     </size>
+                    </property>
                     <property name="text">
                      <string>Send as zero-fee transaction if possible</string>
                     </property>
@@ -1561,6 +1852,12 @@
                   </item>
                   <item>
                    <widget class="QLabel" name="labelFreeTx">
+                    <property name="minimumSize">
+                     <size>
+                      <width>100</width>
+                      <height>15</height>
+                     </size>
+                    </property>
                     <property name="text">
                      <string>(confirmation may take longer)</string>
                     </property>

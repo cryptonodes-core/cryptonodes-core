@@ -4,11 +4,15 @@
  <widget class="QDialog" name="RPCConsole">
   <property name="geometry">
    <rect>
-    <x>0</x>
-    <y>0</y>
     <width>769</width>
     <height>485</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>250</width>
+    <height>200</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Tools window</string>
@@ -16,10 +20,22 @@
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="minimumSize">
+      <size>
+       <width>250</width>
+       <height>200</height>
+      </size>
+     </property>
      <property name="currentIndex">
       <number>3</number>
      </property>
      <widget class="QWidget" name="tab_info">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>200</height>
+       </size>
+      </property>
       <attribute name="title">
        <string>&amp;Information</string>
       </attribute>
@@ -29,6 +45,12 @@
        </property>
        <item row="0" column="0">
         <widget class="QLabel" name="generalHeader">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <weight>75</weight>
@@ -42,6 +64,12 @@
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="clientNameLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Client name</string>
          </property>
@@ -49,6 +77,12 @@
        </item>
        <item row="1" column="1">
         <widget class="QLabel" name="clientName">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -65,6 +99,12 @@
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="clientVersionLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Client version</string>
          </property>
@@ -72,6 +112,12 @@
        </item>
        <item row="2" column="1">
         <widget class="QLabel" name="clientVersion">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -88,6 +134,12 @@
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="openSSLVersionLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Using OpenSSL version</string>
          </property>
@@ -98,6 +150,12 @@
        </item>
        <item row="3" column="1">
         <widget class="QLabel" name="openSSLVersion">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -114,6 +172,12 @@
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="berkeleyDBVersionLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Using BerkeleyDB version</string>
          </property>
@@ -124,6 +188,12 @@
        </item>
        <item row="4" column="1">
         <widget class="QLabel" name="berkeleyDBVersion">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -140,6 +210,12 @@
        </item>
        <item row="5" column="0">
         <widget class="QLabel" name="buildDateLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Build date</string>
          </property>
@@ -147,6 +223,12 @@
        </item>
        <item row="5" column="1">
         <widget class="QLabel" name="buildDate">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -163,6 +245,12 @@
        </item>
        <item row="6" column="0">
         <widget class="QLabel" name="startupTimeLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Startup time</string>
          </property>
@@ -170,6 +258,12 @@
        </item>
        <item row="6" column="1">
         <widget class="QLabel" name="startupTime">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -186,6 +280,12 @@
        </item>
        <item row="7" column="0">
         <widget class="QLabel" name="networkHeader">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <weight>75</weight>
@@ -199,6 +299,12 @@
        </item>
        <item row="8" column="0">
         <widget class="QLabel" name="networkNameLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Name</string>
          </property>
@@ -206,6 +312,12 @@
        </item>
        <item row="8" column="1">
         <widget class="QLabel" name="networkName">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -222,6 +334,12 @@
        </item>
        <item row="9" column="0">
         <widget class="QLabel" name="numberOfConnectionsLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Number of connections</string>
          </property>
@@ -229,6 +347,12 @@
        </item>
        <item row="9" column="1">
         <widget class="QLabel" name="numberOfConnections">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -245,6 +369,12 @@
        </item>
        <item row="10" column="0">
         <widget class="QLabel" name="masternodeCountLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Number of Masternodes</string>
          </property>
@@ -252,6 +382,12 @@
        </item>
        <item row="10" column="1">
         <widget class="QLabel" name="masternodeCount">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -268,6 +404,12 @@
        </item>
        <item row="11" column="0">
         <widget class="QLabel" name="blockchainHeader">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <weight>75</weight>
@@ -281,6 +423,12 @@
        </item>
        <item row="12" column="0">
         <widget class="QLabel" name="numberOfBlocksLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Current number of blocks</string>
          </property>
@@ -288,6 +436,12 @@
        </item>
        <item row="12" column="1">
         <widget class="QLabel" name="numberOfBlocks">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -304,6 +458,12 @@
        </item>
        <item row="13" column="0">
         <widget class="QLabel" name="lastBlockTimeLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Last block time</string>
          </property>
@@ -311,6 +471,12 @@
        </item>
        <item row="13" column="1">
         <widget class="QLabel" name="lastBlockTime">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -340,6 +506,12 @@
        </item>
        <item row="15" column="0">
         <widget class="QLabel" name="debugLogFileHeader">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <weight>75</weight>
@@ -353,6 +525,12 @@
        </item>
        <item row="16" column="0">
         <widget class="QPushButton" name="openDebugLogfileButton">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="toolTip">
           <string>Open the Cryptonodes debug log file from the current data directory. This can take a few seconds for large log files.</string>
          </property>
@@ -367,6 +545,12 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_console">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>200</height>
+       </size>
+      </property>
       <attribute name="title">
        <string>&amp;Console</string>
       </attribute>
@@ -378,7 +562,7 @@
         <widget class="QTextEdit" name="messagesWidget">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>250</width>
            <height>100</height>
           </size>
          </property>
@@ -400,16 +584,35 @@
          </property>
          <item>
           <widget class="QLabel" name="label">
+           <property name="minimumSize">
+            <size>
+             <width>5</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="text">
             <string notr="true">&gt;</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="lineEdit">
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>15</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="clearButton">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>24</width>
@@ -439,6 +642,12 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_nettraffic">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>200</height>
+       </size>
+      </property>
       <attribute name="title">
        <string>&amp;Network Traffic</string>
       </attribute>
@@ -453,12 +662,24 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>200</height>
+            </size>
+           </property>
           </widget>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
             <widget class="QSlider" name="sldGraphRange">
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>15</height>
+              </size>
+             </property>
              <property name="minimum">
               <number>1</number>
              </property>
@@ -481,7 +702,7 @@
              <property name="minimumSize">
               <size>
                <width>100</width>
-               <height>0</height>
+               <height>15</height>
               </size>
              </property>
              <property name="alignment">
@@ -491,6 +712,12 @@
            </item>
            <item>
             <widget class="QPushButton" name="btnClearTrafficGraph">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>15</height>
+              </size>
+             </property>
              <property name="text">
               <string>&amp;Clear</string>
              </property>
@@ -507,6 +734,12 @@
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <widget class="QGroupBox" name="groupBox">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>200</height>
+            </size>
+           </property>
            <property name="title">
             <string>Totals</string>
            </property>
@@ -524,7 +757,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>10</width>
-                  <height>0</height>
+                  <height>1</height>
                  </size>
                 </property>
                 <property name="palette">
@@ -571,6 +804,12 @@
               </item>
               <item>
                <widget class="QLabel" name="label_16">
+                <property name="minimumSize">
+                 <size>
+                  <width>40</width>
+                  <height>10</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>Received</string>
                 </property>
@@ -581,7 +820,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>50</width>
-                  <height>0</height>
+                  <height>10</height>
                  </size>
                 </property>
                 <property name="alignment">
@@ -604,7 +843,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>10</width>
-                  <height>0</height>
+                  <height>3</height>
                  </size>
                 </property>
                 <property name="palette">
@@ -651,6 +890,12 @@
               </item>
               <item>
                <widget class="QLabel" name="label_17">
+                <property name="minimumSize">
+                 <size>
+                  <width>40</width>
+                  <height>10</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>Sent</string>
                 </property>
@@ -661,7 +906,7 @@
                 <property name="minimumSize">
                  <size>
                   <width>50</width>
-                  <height>0</height>
+                  <height>10</height>
                  </size>
                 </property>
                 <property name="alignment">
@@ -692,12 +937,24 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_peers">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>200</height>
+       </size>
+      </property>
       <attribute name="title">
        <string>&amp;Peers</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0" rowspan="2">
         <widget class="QTableView" name="peerWidget">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>200</height>
+          </size>
+         </property>
          <property name="horizontalScrollBarPolicy">
           <enum>Qt::ScrollBarAsNeeded</enum>
          </property>
@@ -752,12 +1009,18 @@
          <property name="minimumSize">
           <size>
            <width>300</width>
-           <height>0</height>
+           <height>150</height>
           </size>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0">
            <widget class="QLabel" name="label_23">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Direction</string>
             </property>
@@ -765,6 +1028,12 @@
           </item>
           <item row="0" column="2">
            <widget class="QLabel" name="peerDirection">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -781,6 +1050,12 @@
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_21">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Protocol</string>
             </property>
@@ -788,6 +1063,12 @@
           </item>
           <item row="1" column="2">
            <widget class="QLabel" name="peerVersion">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -804,6 +1085,12 @@
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_28">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Version</string>
             </property>
@@ -811,6 +1098,12 @@
           </item>
           <item row="2" column="2">
            <widget class="QLabel" name="peerSubversion">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -827,6 +1120,12 @@
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_4">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Services</string>
             </property>
@@ -834,6 +1133,12 @@
           </item>
           <item row="3" column="2">
            <widget class="QLabel" name="peerServices">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -850,6 +1155,12 @@
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="label_29">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Starting Height</string>
             </property>
@@ -857,6 +1168,12 @@
           </item>
           <item row="5" column="2">
            <widget class="QLabel" name="peerHeight">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -873,6 +1190,12 @@
           </item>
           <item row="6" column="0">
            <widget class="QLabel" name="label_27">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Sync Height</string>
             </property>
@@ -880,6 +1203,12 @@
           </item>
           <item row="6" column="2">
            <widget class="QLabel" name="peerSyncHeight">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -896,6 +1225,12 @@
           </item>
           <item row="7" column="0">
            <widget class="QLabel" name="label_24">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Ban Score</string>
             </property>
@@ -903,6 +1238,12 @@
           </item>
           <item row="7" column="2">
            <widget class="QLabel" name="peerBanScore">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -919,6 +1260,12 @@
           </item>
           <item row="8" column="0">
            <widget class="QLabel" name="label_22">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Connection Time</string>
             </property>
@@ -926,6 +1273,12 @@
           </item>
           <item row="8" column="2">
            <widget class="QLabel" name="peerConnTime">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -942,6 +1295,12 @@
           </item>
           <item row="9" column="0">
            <widget class="QLabel" name="label_15">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Last Send</string>
             </property>
@@ -949,6 +1308,12 @@
           </item>
           <item row="9" column="2">
            <widget class="QLabel" name="peerLastSend">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -965,6 +1330,12 @@
           </item>
           <item row="10" column="0">
            <widget class="QLabel" name="label_19">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Last Receive</string>
             </property>
@@ -972,6 +1343,12 @@
           </item>
           <item row="10" column="2">
            <widget class="QLabel" name="peerLastRecv">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -988,6 +1365,12 @@
           </item>
           <item row="11" column="0">
            <widget class="QLabel" name="label_18">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Bytes Sent</string>
             </property>
@@ -995,6 +1378,12 @@
           </item>
           <item row="11" column="2">
            <widget class="QLabel" name="peerBytesSent">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -1011,6 +1400,12 @@
           </item>
           <item row="12" column="0">
            <widget class="QLabel" name="label_20">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Bytes Received</string>
             </property>
@@ -1018,6 +1413,12 @@
           </item>
           <item row="12" column="2">
            <widget class="QLabel" name="peerBytesRecv">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -1034,6 +1435,12 @@
           </item>
           <item row="13" column="0">
            <widget class="QLabel" name="label_26">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="text">
              <string>Ping Time</string>
             </property>
@@ -1041,6 +1448,12 @@
           </item>
           <item row="13" column="2">
            <widget class="QLabel" name="peerPingTime">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>10</height>
+             </size>
+            </property>
             <property name="cursor">
              <cursorShape>IBeamCursor</cursorShape>
             </property>
@@ -1074,6 +1487,12 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tab_repair">
+      <property name="minimumSize">
+       <size>
+        <width>250</width>
+        <height>200</height>
+       </size>
+      </property>
       <attribute name="title">
        <string>&amp;Wallet Repair</string>
       </attribute>
@@ -1096,6 +1515,12 @@
        </item>
        <item row="0" column="0" colspan="4">
         <widget class="QLabel" name="label_repair_header">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <weight>75</weight>
@@ -1109,6 +1534,12 @@
        </item>
        <item row="1" column="0" colspan="4">
         <widget class="QLabel" name="label_repair_helptext">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <weight>50</weight>
@@ -1125,6 +1556,12 @@
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="wallet_path_label">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="text">
           <string>Wallet In Use:</string>
          </property>
@@ -1132,6 +1569,12 @@
        </item>
        <item row="2" column="1" colspan="3">
         <widget class="QLabel" name="wallet_path">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
          </property>
@@ -1174,6 +1617,12 @@
        </item>
        <item row="4" column="2">
         <widget class="QLabel" name="label_repair_salvage_command">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string notr="true">-salvagewallet:</string>
          </property>
@@ -1181,6 +1630,12 @@
        </item>
        <item row="4" column="3">
         <widget class="QLabel" name="label_repair_salvage">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string>Attempt to recover private keys from a corrupt wallet.dat.</string>
          </property>
@@ -1204,6 +1659,12 @@
        </item>
        <item row="5" column="2">
         <widget class="QLabel" name="label_repair_rescan_command">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string notr="true">-rescan:</string>
          </property>
@@ -1211,6 +1672,12 @@
        </item>
        <item row="5" column="3">
         <widget class="QLabel" name="label_repair_rescan">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string>Rescan the block chain for missing wallet transactions.</string>
          </property>
@@ -1234,6 +1701,12 @@
        </item>
        <item row="6" column="2">
         <widget class="QLabel" name="label_repair_zap1_command">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string notr="true">-zapwallettxes=1:</string>
          </property>
@@ -1241,6 +1714,12 @@
        </item>
        <item row="6" column="3">
         <widget class="QLabel" name="label_repair_zap1">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string>Recover transactions from blockchain (keep meta-data, e.g. account owner).</string>
          </property>
@@ -1264,6 +1743,12 @@
        </item>
        <item row="7" column="2">
         <widget class="QLabel" name="label_repair_zap2_command">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string notr="true">-zapwallettxes=2:</string>
          </property>
@@ -1271,6 +1756,12 @@
        </item>
        <item row="7" column="3">
         <widget class="QLabel" name="label_repair_zap2">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string>Recover transactions from blockchain (drop meta-data).</string>
          </property>
@@ -1294,6 +1785,12 @@
        </item>
        <item row="8" column="2">
         <widget class="QLabel" name="label_repair_upgrade_command">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string notr="true">-upgradewallet:</string>
          </property>
@@ -1301,6 +1798,12 @@
        </item>
        <item row="8" column="3">
         <widget class="QLabel" name="label_repair_upgrade">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string>Upgrade wallet to latest format on startup. (Note: this is NOT an update of the wallet itself!)</string>
          </property>
@@ -1324,6 +1827,12 @@
        </item>
        <item row="9" column="2">
         <widget class="QLabel" name="label_repair_reindex_command">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string notr="true">-reindex:</string>
          </property>
@@ -1331,6 +1840,12 @@
        </item>
        <item row="9" column="3">
         <widget class="QLabel" name="label_repair_reindex">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string>Rebuild block chain index from current blk000??.dat files.</string>
          </property>
@@ -1354,6 +1869,12 @@
        </item>
        <item row="10" column="2">
         <widget class="QLabel" name="label_repair_resync_command">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string>-resync:</string>
          </property>
@@ -1361,6 +1882,12 @@
        </item>
        <item row="10" column="3">
         <widget class="QLabel" name="label_repair_resync">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>15</height>
+          </size>
+         </property>
          <property name="text">
           <string>Deletes all local blockchain folders so the wallet synchronizes from scratch.</string>
          </property>

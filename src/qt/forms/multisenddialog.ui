@@ -7,11 +7,15 @@
   </property>
   <property name="geometry">
    <rect>
-    <x>0</x>
-    <y>0</y>
     <width>594</width>
     <height>526</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>250</width>
+    <height>150</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MultiSend</string>
@@ -33,6 +37,12 @@
     <layout class="QVBoxLayout" name="verticalLayout_Main" stretch="1,1,1,0,1,1,1">
      <item>
       <widget class="QLabel" name="label_2">
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>75</height>
+        </size>
+       </property>
        <property name="lineWidth">
         <number>1</number>
        </property>
@@ -54,7 +64,7 @@ MultiSend will not be activated unless you have clicked Activate</string>
       <widget class="Line" name="line">
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>300</width>
          <height>1</height>
         </size>
        </property>
@@ -75,6 +85,12 @@ MultiSend will not be activated unless you have clicked Activate</string>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QCheckBox" name="multiSendStakeCheckBox">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>15</height>
+            </size>
+           </property>
            <property name="text">
             <string>Send For Stakes</string>
            </property>
@@ -82,6 +98,12 @@ MultiSend will not be activated unless you have clicked Activate</string>
          </item>
          <item>
           <widget class="QCheckBox" name="multiSendMasternodeCheckBox">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>15</height>
+            </size>
+           </property>
            <property name="text">
             <string>Send For Masternode Rewards</string>
            </property>
@@ -96,7 +118,7 @@ MultiSend will not be activated unless you have clicked Activate</string>
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>0</height>
+             <height>15</height>
             </size>
            </property>
            <property name="toolTip">
@@ -109,6 +131,12 @@ MultiSend will not be activated unless you have clicked Activate</string>
          </item>
          <item>
           <widget class="QLineEdit" name="multiSendPercentEdit">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>15</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string>Enter whole numbers 1 - 100</string>
            </property>
@@ -126,7 +154,7 @@ MultiSend will not be activated unless you have clicked Activate</string>
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>0</height>
+             <height>15</height>
             </size>
            </property>
            <property name="toolTip">
@@ -139,6 +167,12 @@ MultiSend will not be activated unless you have clicked Activate</string>
          </item>
          <item>
           <widget class="QLineEdit" name="multiSendAddressEdit">
+           <property name="minimumSize">
+            <size>
+             <width>300</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string/>
            </property>
@@ -149,6 +183,12 @@ MultiSend will not be activated unless you have clicked Activate</string>
          </item>
          <item>
           <widget class="QToolButton" name="addressBookButton">
+           <property name="minimumSize">
+            <size>
+             <width>15</width>
+             <height>15</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -181,7 +221,7 @@ MultiSend will not be activated unless you have clicked Activate</string>
          <property name="minimumSize">
           <size>
            <width>100</width>
-           <height>0</height>
+           <height>20</height>
           </size>
          </property>
          <property name="text">
@@ -191,6 +231,12 @@ MultiSend will not be activated unless you have clicked Activate</string>
        </item>
        <item>
         <widget class="QLineEdit" name="labelAddressLabelEdit">
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>20</height>
+          </size>
+         </property>
          <property name="placeholderText">
           <string>Enter a label for this address to add it to your address book</string>
          </property>
@@ -202,7 +248,7 @@ MultiSend will not be activated unless you have clicked Activate</string>
       <widget class="Line" name="line_2">
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>300</width>
          <height>1</height>
         </size>
        </property>
@@ -223,6 +269,12 @@ MultiSend will not be activated unless you have clicked Activate</string>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
           <widget class="QPushButton" name="viewButton">
+           <property name="minimumSize">
+            <size>
+             <width>300</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string/>
            </property>
@@ -240,6 +292,12 @@ MultiSend will not be activated unless you have clicked Activate</string>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QPushButton" name="addButton">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string/>
            </property>
@@ -253,6 +311,12 @@ MultiSend will not be activated unless you have clicked Activate</string>
          </item>
          <item>
           <widget class="QPushButton" name="deleteButton">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="toolTip">
             <string/>
            </property>
@@ -270,6 +334,12 @@ MultiSend will not be activated unless you have clicked Activate</string>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
           <widget class="QPushButton" name="activateButton">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="statusTip">
             <string>Activate MultiSend</string>
            </property>
@@ -280,6 +350,12 @@ MultiSend will not be activated unless you have clicked Activate</string>
          </item>
          <item>
           <widget class="QPushButton" name="disableButton">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="statusTip">
             <string>Deactivate MultiSend</string>
            </property>
@@ -296,7 +372,7 @@ MultiSend will not be activated unless you have clicked Activate</string>
       <widget class="QLabel" name="message">
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>300</width>
          <height>180</height>
         </size>
        </property>
